@@ -1,7 +1,7 @@
 # 프로젝트 메모
 
-1992~1996년 QuickBasic DOS 게임과 프로그램(브니엘고 컴퓨터 서클 돈데크만, 정상혁)을 정적 웹페이지로 재구현한 프로젝트다.
-게임 규칙과 파일 구성은 README.md에 있다.
+1992~1996년 QuickBasic DOS 프로그램(브니엘고 컴퓨터 서클 돈데크만, 정상혁)을 정적 웹페이지로 재구현한 프로젝트다.
+프로그램별 사용법과 파일 구성은 README.md에 있다.
 여기에는 코드만 봐서는 알 수 없는 배경만 적는다.
 
 ## 문서와 답변 작성 규칙
@@ -16,13 +16,13 @@
 - 청기백기 최종본은 `FF4.BAS`다.
   `FLAGV.BAS`와 `../old-com/LAN/QB/PCXLIB/FLV2.BAS`는 판정이 없는 이전 데모다.
   `NEWFF4.BAS`는 이전 버전이 아니라 1996년 퍼즐 작업 때 FF4를 고치다 만 곁가지다.
-  버전 비교는 `difference.md`에 있다.
+  버전 비교는 `flag/history.md`에 있다.
 - 퍼즐은 `PUZZLE.BAS`다.
 - `MKPU.BAS`는 BOARD.SPR을 만든 도구다.
   `VOICE.BAS`, `FLAG2.BAS`는 사운드블라스터 DMA 테스트다.
 - 같은 폴더의 `DUMP*.PCX`, `NECH2.PCX`, `DISK`, `DON.WAV`, `DON3.WAV`, `BUP/WUP.WAV`는 게임에서 쓰지 않는 파일이다.
-- 바이오리듬, 계산 연습, 그림판, 시계의 원작은 `../old-com/LAN/QB/`에 있다.
-  `BIO.BAS`, `CP.BAS`, `RANDOM.BAS`, `MULTI.BAS`, `D2.BAS`, `CLOCK.BAS`다.
+- 바이오리듬, 계산 연습, 그림판의 원작은 `../old-com/LAN/QB/`에 있다.
+  `BIO.BAS`, `CP.BAS`, `RANDOM.BAS`, `MULTI.BAS`, `D2.BAS`다.
   그림판 관련 루틴은 `READPIC.BAS`(.pic 로더), `BSAVE.BAS`, 격자 편집기 `GE.BAS`다.
 - `LAN/QB/`는 파일마다 한글 인코딩이 다르다.
   `BIO.BAS`는 조합형이라 `iconv -c -f JOHAB -t UTF-8`로 읽는다.
@@ -33,10 +33,10 @@
 
 ## 에셋 변환 방법 (assets/ 를 다시 만들 때)
 
-- 에셋은 게임별로 `flag/assets/`, `puzzle/assets/`에 나뉘어 있다.
-  바이오리듬, 계산 연습, 그림판, 시계는 `bio/`, `calc/`, `paint/`, `clock/`에 있다.
+- 에셋은 프로그램별로 `flag/assets/`, `puzzle/assets/`에 나뉘어 있다.
+  바이오리듬, 계산 연습, 그림판은 `bio/`, `calc/`, `paint/`에 있다.
   루트에는 공통 `style.css`와 `textscreen.js`(QB 텍스트 화면 흉내, 바이오리듬과 계산 연습이 씀)만 둔다.
-- 새 네 페이지의 `assets/thumb.png`는 원작 그림이 아니라 웹 버전 화면을 헤드리스 Chrome으로 캡처한 카드용 그림이다.
+- 새 세 페이지의 `assets/thumb.png`는 원작 그림이 아니라 웹 버전 화면을 헤드리스 Chrome으로 캡처한 카드용 그림이다.
   그림판 썸네일은 청기백기 `board.png`를 Load(Dr)로 불러와 디더링한 화면이다.
 - `*.SPR`은 SVGAQB의 BLKGET/BSAVE 형식이다.
   7바이트 BSAVE 헤더 뒤에 `(폭-1)`, `(높이-1)`가 각각 16비트 LE로 온다.
@@ -85,7 +85,7 @@
   `google-chrome --headless=new --remote-debugging-port=...`를 띄운다.
   Node 내장 `WebSocket`으로 CDP를 직접 호출해 키 입력, 스크린샷, 상태 확인을 한다.
   외부 패키지는 필요 없다.
-- URL 뒤에 `#debug`를 붙이면 `window.__flag`, `__puzzle`, `__bio`, `__calc`, `__paint`, `__clock`으로 내부 상태가 노출된다.
+- URL 뒤에 `#debug`를 붙이면 `window.__flag`, `__puzzle`, `__bio`, `__calc`, `__paint`로 내부 상태가 노출된다.
   테스트 스크립트는 이 훅으로 정답을 읽어 자동 진행했다.
   계산 연습은 `__calc.scr.cells`에서 현재 줄의 문제를 읽었다.
 - 같은 URL에 해시만 바꿔 `Page.navigate`하면 다시 로드되지 않는다.
@@ -96,14 +96,16 @@
 
 ## 결정 사항
 
-- 저장소는 `git@github.com:benelog/games-1995.git`이다(2026-09-11 생성).
-  예전에 정했던 `dondekman-games` 이름 대신 `games-1995`를 쓴다.
+- 저장소는 `git@github.com:benelog/qb-attic.git`이다.
+  2026-09-11에 `games-1995`로 만들었다가 2026-09-12에 `qb-attic`으로 이름을 바꿨다.
+  게임만 있는 모음이 아니라서 사이트 이름은 "Quick Basic 프로그램 보관소"로 하고, 문구에서 '게임' 대신 '프로그램'을 쓴다.
   코드는 모두 상대 경로라 디렉터리 이름에 영향을 받지 않는다.
 - 커밋할 때는 사용자 전역 규칙(간단한 메시지, SSH, main 브랜치)을 따른다.
 - 배포는 GitHub Pages(main 브랜치 루트)로 한다.
-  주소는 `https://games-1995.benelog.net/`이고 루트의 `CNAME` 파일이 이 도메인을 지정한다.
-  DNS는 Netlify DNS(benelog 팀)에서 `games-1995` CNAME → `benelog.github.io`로 연결한다.
+  주소는 `https://qb-attic.benelog.net/`이고 루트의 `CNAME` 파일이 이 도메인을 지정한다.
+  DNS는 Netlify DNS(benelog 팀)에서 `qb-attic` CNAME → `benelog.github.io`로 연결한다.
+  예전 `games-1995` 레코드는 지웠다.
 - 순위 이름 입력은 `flag-game.lastName` 키를 청기백기, 퍼즐, 계산 연습이 공유한다.
 - 바이오리듬은 원작의 두 자리 연도 대신 네 자리 연도(1900~2099)를 받는다.
   원작은 2000년 이후 살아온 날이 음수가 되는 Y2K 문제가 있다.
-- 시계는 원작의 시침 버그(`d` 대신 `c` 사용)를 기본으로 두고 옵션으로 고친다.
+- 시계(`CLOCK.BAS`)는 한때 넣었다가 2026-09-12에 뺐다.

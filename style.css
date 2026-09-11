@@ -165,12 +165,12 @@ kbd {
 
 footer a { color: #f0b060; }
 
-/* ---------- 게임 선택 (index.html) ---------- */
+/* ---------- 프로그램 목록 (index.html) ---------- */
 #launcher { width: min(100%, 720px); }
 #launcher h1 { text-align: center; font-size: 1.6rem; margin: 8px 0 2px; color: #f4dcbd; }
 #launcher .sub { text-align: center; opacity: .75; margin: 0 0 18px; font-size: .95rem; }
-.games { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-.game-card {
+.programs { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.program-card {
   display: block;
   text-decoration: none;
   color: #2a1608;
@@ -181,13 +181,13 @@ footer a { color: #f0b060; }
   box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
   transition: transform .12s, box-shadow .12s;
 }
-.game-card:hover, .game-card:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, .6); outline: none; }
-.game-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; image-rendering: pixelated; border-bottom: 3px solid var(--wood-dark); background: #000; }
-.game-card .body { padding: 12px 14px 14px; }
-.game-card h2 { margin: 0 0 6px; font-size: 1.2rem; }
-.game-card p { margin: 0 0 8px; font-size: .9rem; line-height: 1.5; }
-.game-card .meta { font-size: .8rem; opacity: .7; }
-.game-card .best { font-size: .85rem; font-weight: bold; color: #7a1010; }
+.program-card:hover, .program-card:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, .6); outline: none; }
+.program-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; image-rendering: pixelated; border-bottom: 3px solid var(--wood-dark); background: #000; }
+.program-card .body { padding: 12px 14px 14px; }
+.program-card h2 { margin: 0 0 6px; font-size: 1.2rem; }
+.program-card p { margin: 0 0 8px; font-size: .9rem; line-height: 1.5; }
+.program-card .meta { font-size: .8rem; opacity: .7; }
+.program-card .best { font-size: .85rem; font-weight: bold; color: #7a1010; }
 
 /* ---------- 퍼즐 방향 버튼 ---------- */
 #dpad { display: grid; grid-template-columns: repeat(3, 64px); grid-template-rows: repeat(2, 56px); gap: 6px; justify-content: center; }
@@ -232,10 +232,8 @@ select { font: inherit; padding: 4px 6px; border-radius: 4px; border: 2px solid 
 .prog-tabs button[aria-pressed="true"] { background: var(--wood); font-weight: bold; }
 .status { font-size: .9rem; opacity: .85; text-align: center; min-height: 1.3em; }
 
-/* ---------- 시계, 그림판 (원본 픽셀 폭 그대로 보이도록 테두리만큼 넓힌다) ---------- */
-#stage.clock-stage { width: min(100%, 648px, calc((100vh - 200px) * 4 / 3)); aspect-ratio: 648 / 488; }
+/* ---------- 그림판 (원본 픽셀 폭 그대로 보이도록 테두리만큼 넓힌다) ---------- */
 #stage.paint-stage { width: min(100%, 728px, calc((100vh - 230px) * 4 / 3)); aspect-ratio: 728 / 548; }
-.clock-stage #screen { cursor: default; }
 
 /* ---------- 그림판 ---------- */
 .paint-stage #screen { cursor: crosshair; touch-action: none; }

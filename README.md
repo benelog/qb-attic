@@ -1,6 +1,6 @@
-# 돈데크만 게임 모음 (FLAG)
+# Quick Basic 프로그램 보관소 (qb-attic)
 
-정상혁(브니엘고 컴퓨터 서클 "돈데크만")이 1992~1996년에 QuickBasic 4.5로 만든 DOS 게임과 프로그램을 정적 웹페이지로 다시 구현한 것입니다.
+정상혁(브니엘고 컴퓨터 서클 "돈데크만")이 1992~1996년에 QuickBasic 4.5로 만든 DOS 프로그램을 정적 웹페이지로 다시 구현한 것입니다.
 `index.html`에서 고릅니다.
 
 | 페이지 | 프로그램 | 원작 |
@@ -10,16 +10,15 @@
 | `bio/index.html` | 바이오리듬 | `LAN/QB/BIO.BAS` (1993) |
 | `calc/index.html` | 계산 연습 (CP, RANDOM, MULTI) | `LAN/QB/CP.BAS` (1996), `RANDOM.BAS`, `MULTI.BAS` (1994) |
 | `paint/index.html` | 그림판 | `LAN/QB/D2.BAS` (1992) |
-| `clock/index.html` | 아날로그 시계 | `LAN/QB/CLOCK.BAS` (1995) |
 
 청기백기와 퍼즐은 원작의 그림(`DGI.GIF`, `LOGO.GIF`, `M3.GIF`), 스프라이트(`*.SPR`),
 음성 명령(`B1~B12.WAV`, `START.WAV`, `DON2.WAV`)을 그대로 변환해서 사용합니다.
-나머지 네 개는 그림 파일이 없는 프로그램이라 원작 코드의 화면 출력을 그대로 옮겼습니다.
-청기백기 소스 여러 벌(데모판 `FLV2.BAS`, `FLAGV.BAS`, `NEWFF4.BAS`와 준비 코드)의 차이는 `difference.md`에 정리했습니다.
+나머지 세 개는 그림 파일이 없는 프로그램이라 원작 코드의 화면 출력을 그대로 옮겼습니다.
+청기백기 소스 여러 벌(데모판 `FLV2.BAS`, `FLAGV.BAS`, `NEWFF4.BAS`와 준비 코드)의 차이는 `flag/history.md`에 정리했습니다.
 
 ## 실행
 
-배포 주소: https://games-1995.benelog.net/ (GitHub Pages)
+배포 주소: https://qb-attic.benelog.net/ (GitHub Pages)
 
 정적 파일이므로 아무 웹 서버에나 올리면 됩니다.
 
@@ -81,7 +80,7 @@ python3 -m http.server 8000
 화면은 QB 텍스트 모드(80×25)를 흉내 낸 캔버스입니다.
 
 - 메뉴에서 숫자 키를 누릅니다.
-  1은 화면 출력, 2는 인쇄 용지, 3·4는 게임 선택 화면으로 나갑니다.
+  1은 화면 출력, 2는 인쇄 용지, 3·4는 프로그램 목록으로 나갑니다.
 - 화면 출력은 생년월일과 오늘 날짜로 살아온 날을 구합니다.
   건강 23일, 감성 28일, 지성 33일 주기의 사인 곡선을 `$`, `O`, `#` 문자로 그립니다.
   한 칸이 반나절이고 오늘 앞 5일부터 뒤 30일까지 보입니다.
@@ -120,7 +119,7 @@ python3 -m http.server 8000
 |------|------|----------------|
 | FILE | Load, Save, Kill, Rename | 브라우저(Local Storage)에 이름 붙여 저장한 그림을 불러오기, 저장, 지우기, 이름 바꾸기 |
 | | Load(Dr) | 디스크 파일 불러오기. 원작 `.pic` 형식, BSAVE 화면 덤프, 일반 그림 파일(흑백 디더링) |
-| | Exit | 게임 선택 화면으로 |
+| | Exit | 프로그램 목록으로 |
 | TOOLS | Pen | 자유 그리기. 원작 메뉴에 없는 항목입니다(추가). |
 | | Glasses | 돋보기(8배, 한 점씩 편집) 켜고 끄기 |
 | | Paint, Line, Box, Circle, write, Spray | 무늬 채우기, 선, 상자, 원(4:3 화면에서 둥글게 보이도록 보정), 글자, 스프레이 |
@@ -143,22 +142,10 @@ python3 -m http.server 8000
   이름 붙여 저장한 그림은 `paint.files`, 조각은 `paint.part` 키에 있습니다.
 - 화면 색은 녹색, 호박색, 흑백 모니터 중에서 고릅니다.
 
-## 아날로그 시계 (clock/)
-
-원작 `CLOCK.BAS`(1995)를 픽셀 단위로 옮겼습니다(SCREEN 12, 640×480 16색).
-DRAW 명령(`C`, `BM`, `TA`, `B`, `U`)을 작은 해석기로 흉내 냅니다.
-
-- 무작위 색 점 19800개 위에 원 두 개와 눈금을 그립니다.
-- 원작은 매초 지금 바늘을 검은색으로 그리고, 초가 바뀌면 같은 자리를 흰색으로 다시 그려 "지웁니다".
-  그래서 지나간 초침이 6도 간격의 흰 선으로 쌓여 1분이면 햇살 무늬가 되고, 지금 바늘은 흰 선 사이의 검은 틈으로 보입니다.
-- 원작은 시침 각도로 계산해 둔 `d` 대신 `c`(= -시)를 써서 시침이 거의 12시 쪽을 가리킵니다.
-  "고친 시침" 옵션을 고르면 시·분으로 제대로 계산합니다(`clock.options` 키).
-- `E`를 누르면 원작처럼 끝나고, 아무 키나 누르면 다시 시작합니다.
-
 ## 파일 구성
 
 ```
-index.html                  게임 선택 (최고 기록도 표시)
+index.html                  프로그램 목록 (최고 기록도 표시)
 style.css                   공통 스타일
 flag/index.html, flag.js    청기백기
 flag/assets/board.png       원작 DGI.GIF (청기백기 보드)
@@ -174,13 +161,12 @@ textscreen.js               QB 텍스트 화면(80x25, PRINT/INPUT/INKEY$) 흉�
 bio/index.html, bio.js      바이오리듬
 calc/index.html, calc.js    계산 연습 (CP, RANDOM, MULTI)
 paint/index.html, paint.js  그림판
-clock/index.html, clock.js  아날로그 시계
-*/assets/thumb.png          게임 선택 화면의 카드 그림 (웹 버전 화면을 캡처)
-difference.md               청기백기 소스 버전 비교
+*/assets/thumb.png          프로그램 목록의 카드 그림 (웹 버전 화면을 캡처)
+flag/history.md             청기백기 소스 버전 비교
 ```
 
 Local Storage 키: `flag-game.ranking`, `flag-game.options`, `puzzle-game.ranking`, `puzzle-game.options`,
-`calc-game.ranking`, `calc-game.options`, `paint.files`, `paint.current`, `paint.part`, `paint.options`, `clock.options`,
+`calc-game.ranking`, `calc-game.options`, `paint.files`, `paint.current`, `paint.part`, `paint.options`,
 `flag-game.lastName`(마지막에 입력한 이름, 청기백기·퍼즐·계산 연습이 공유).
 
 ## 참고: 청기백기 음성 파일과 명령의 대응
