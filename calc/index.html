@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>계산 연습 - 돈데크만</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+  <div class="prog-tabs" role="group" aria-label="프로그램 선택">
+    <button type="button" id="btn-menu">메뉴</button>
+    <button type="button" data-prog="cp" aria-pressed="false">1. CP 계산 연습</button>
+    <button type="button" data-prog="random" aria-pressed="false">2. RANDOM 덧셈·뺄셈</button>
+    <button type="button" data-prog="multi" aria-pressed="false">3. MULTI 곱셈</button>
+  </div>
+
+  <div id="stage" class="text-stage">
+    <canvas id="screen" width="720" height="400" aria-label="계산 연습 화면"></canvas>
+
+    <div id="overlay" class="overlay" hidden>
+      <div class="panel" id="panel-name" hidden>
+        <h2>🏆 최고 기록 진입!</h2>
+        <p id="name-summary"></p>
+        <form id="name-form" autocomplete="off">
+          <input id="name-input" type="text" maxlength="10" placeholder="이름 (최대 10자)" required>
+          <button type="submit">저장</button>
+        </form>
+      </div>
+      <div class="panel" id="panel-rank" hidden>
+        <h2>🏁 순위표</h2>
+        <div class="row" style="justify-content:flex-start">
+          <button type="button" data-rank="random" aria-pressed="true">RANDOM 덧셈·뺄셈</button>
+          <button type="button" data-rank="multi" aria-pressed="false">MULTI 곱셈</button>
+        </div>
+        <p id="rank-title"></p>
+        <table id="rank-table">
+          <thead><tr><th>#</th><th>이름</th><th>정답</th><th>시간</th><th>날짜</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p class="hint">정답이 많은 순, 같으면 시간이 짧은 순입니다. 이 브라우저의 Local Storage에 저장됩니다.</p>
+        <div class="row">
+          <button id="rank-close" type="button">닫기</button>
+          <button id="rank-clear" type="button" class="danger">기록 삭제</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p id="status" class="status" aria-live="polite"></p>
+
+  <div id="options">
+    <label><input type="checkbox" id="opt-limit"> CP 문제당 제한시간 적용 (원작은 입력만 받고 쓰지 않음)</label>
+    <button type="button" id="btn-rank">순위표</button>
+  </div>
+
+  <footer>
+    원작: 정상혁 (CP.BAS 1996년, RANDOM.BAS·MULTI.BAS 1994년, QuickBasic 4.5). 웹 재구현 2026.
+    답을 입력하고 <kbd>Enter</kbd>. CP의 "Press Any Key..."에서 <kbd>Esc</kbd>를 누르면 메뉴로 돌아갑니다.
+    모바일에서는 화면을 누르면 키보드가 나옵니다.
+    <br><a href="../index.html">← 게임 선택으로</a>
+  </footer>
+</main>
+
+<script src="../textscreen.js"></script>
+<script src="calc.js"></script>
+</body>
+</html>
