@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>청기백기 - 돈데크만</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+  <div id="stage">
+    <canvas id="screen" width="640" height="480" aria-label="청기백기 게임 화면"></canvas>
+
+    <div id="overlay" class="overlay" hidden>
+      <div class="panel" id="panel-name" hidden>
+        <h2>🏆 최고 기록 진입!</h2>
+        <p id="name-summary"></p>
+        <form id="name-form" autocomplete="off">
+          <input id="name-input" type="text" maxlength="10" placeholder="이름 (최대 10자)" required>
+          <button type="submit">저장</button>
+        </form>
+      </div>
+      <div class="panel" id="panel-rank" hidden>
+        <h2>🏁 순위표</h2>
+        <table id="rank-table">
+          <thead><tr><th>#</th><th>이름</th><th>점수</th><th>맞은 횟수</th><th>날짜</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p class="hint">순위는 이 브라우저의 Local Storage에 저장됩니다.</p>
+        <div class="row">
+          <button id="rank-close" type="button">닫기</button>
+          <button id="rank-clear" type="button" class="danger">기록 삭제</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="touch-keys" role="group" aria-label="깃발 조작 버튼">
+    <button type="button" class="blue" data-action="bu">청기 올려<small>A</small></button>
+    <button type="button" class="blue" data-action="bd">청기 내려<small>Z</small></button>
+    <button type="button" class="white" data-action="wu">백기 올려<small>'</small></button>
+    <button type="button" class="white" data-action="wd">백기 내려<small>/</small></button>
+  </div>
+
+  <div id="options">
+    <label><input type="checkbox" id="opt-caption" checked> 자막 표시</label>
+    <label><input type="checkbox" id="opt-sound" checked> 소리</label>
+    <button type="button" id="btn-rank">순위표</button>
+  </div>
+
+  <footer>
+    원작: 브니엘고 컴퓨터 서클 돈데크만, 정상혁 (1995년 2월, QuickBasic 4.5 + SVGAQB).
+    웹 재구현 2026. 키보드 <kbd>A</kbd>/<kbd>Z</kbd> 청기, <kbd>'</kbd>/<kbd>/</kbd> 백기, <kbd>Esc</kbd> 메뉴.
+    <br><a href="../index.html">← 게임 선택으로</a>
+  </footer>
+</main>
+
+<div id="assets" hidden>
+  <img id="img-board" src="assets/board.png" alt="">
+  <img id="img-logo" src="assets/logo.png" alt="">
+  <img id="img-bu" src="assets/flag_blue_up.png" alt="">
+  <img id="img-bd" src="assets/flag_blue_down.png" alt="">
+  <img id="img-wu" src="assets/flag_white_up.png" alt="">
+  <img id="img-wd" src="assets/flag_white_down.png" alt="">
+</div>
+
+<script src="flag.js"></script>
+</body>
+</html>

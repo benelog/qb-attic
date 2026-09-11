@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>돈데크만 게임 모음</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+  <div id="launcher">
+    <h1>브니엘고 컴퓨터 서클 돈데크만</h1>
+    <p class="sub">1995년 QuickBasic으로 만든 DOS 게임을 브라우저에서 다시 즐깁니다. 기록은 이 브라우저의 Local Storage에 저장됩니다.</p>
+
+    <div class="games">
+      <a class="game-card" href="flag/index.html">
+        <img src="flag/assets/board.png" alt="청기백기 게임 화면">
+        <div class="body">
+          <h2>🚩 청기백기</h2>
+          <p>음성 명령을 듣고 청기와 백기를 올리고 내리세요. "올리지 마!"에 속으면 안 됩니다. 4번 틀리면 끝.</p>
+          <div class="best" id="best-flag"></div>
+          <div class="meta">키보드 A / Z / ' / &nbsp;·&nbsp; 원작 FF4.BAS</div>
+        </div>
+      </a>
+
+      <a class="game-card" href="puzzle/index.html">
+        <img src="puzzle/assets/puzzle_screen.png" alt="퍼즐 그림 맞추기 화면">
+        <div class="body">
+          <h2>🌹 퍼즐 그림 맞추기</h2>
+          <p>3×3 슬라이딩 퍼즐. 흩어진 장미 그림 조각을 화살표 키로 밀어 원래 그림을 완성하세요.</p>
+          <div class="best" id="best-puzzle"></div>
+          <div class="meta">키보드 ← ↑ → ↓ &nbsp;·&nbsp; 원작 PUZZLE.BAS</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    원작: 브니엘고 컴퓨터 서클 돈데크만, 정상혁 (1995년 2월, QuickBasic 4.5 + SVGAQB). 웹 재구현 2026.
+  </footer>
+</main>
+
+<script>
+(() => {
+  const read = (k) => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch { return []; } };
+  const flag = read('flag-game.ranking');
+  if (flag.length) document.getElementById('best-flag').textContent = `최고 기록: ${flag[0].score.toLocaleString()}점 (${flag[0].name})`;
+  const puzzle = read('puzzle-game.ranking');
+  if (puzzle.length) {
+    const r = puzzle[0];
+    const mm = String(Math.floor(r.seconds / 60)).padStart(2, '0'), ss = String(r.seconds % 60).padStart(2, '0');
+    document.getElementById('best-puzzle').textContent = `최고 기록: ${mm}:${ss}, ${r.moves}회 이동 (${r.name})`;
+  }
+})();
+</script>
+</body>
+</html>

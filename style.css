@@ -1,0 +1,200 @@
+:root {
+  --bg: #1b1410;
+  --wood: #c98a4a;
+  --wood-dark: #8a5324;
+  --ink: #f4e9d8;
+  --blue: #1e3fbf;
+  --red: #c41e1e;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Nanum Gothic", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px 24px;
+  min-height: 100vh;
+}
+
+#stage {
+  position: relative;
+  width: min(100%, 640px, calc((100vh - 200px) * 4 / 3));
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  border: 4px solid var(--wood-dark);
+  border-radius: 6px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .6);
+  background: #000;
+  overflow: hidden;
+}
+
+#screen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ---------- 오버레이 (이름 입력 / 순위표) ---------- */
+.overlay[hidden] { display: none; }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .55);
+  padding: 12px;
+}
+
+.panel {
+  background: var(--wood);
+  color: #2a1608;
+  border: 3px solid var(--wood-dark);
+  border-radius: 8px;
+  padding: 16px 20px;
+  width: min(100%, 440px);
+  max-height: 100%;
+  overflow: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .5);
+}
+
+.panel h2 { margin: 0 0 10px; font-size: 1.3rem; }
+.panel p { margin: 6px 0; }
+.panel .hint { font-size: .8rem; opacity: .75; }
+.panel .row { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+
+#name-form { display: flex; gap: 8px; margin-top: 10px; }
+#name-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 1.05rem;
+  padding: 8px 10px;
+  border: 2px solid var(--wood-dark);
+  border-radius: 4px;
+  background: #fff7ea;
+}
+
+#rank-table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+#rank-table th, #rank-table td { padding: 4px 6px; border-bottom: 1px solid rgba(0, 0, 0, .2); text-align: left; }
+#rank-table td:nth-child(3), #rank-table td:nth-child(4),
+#rank-table th:nth-child(3), #rank-table th:nth-child(4) { text-align: right; }
+#rank-table tr.me { background: rgba(255, 255, 255, .45); font-weight: bold; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 2px solid var(--wood-dark);
+  border-radius: 6px;
+  background: #f4dcbd;
+  color: #2a1608;
+  padding: 8px 14px;
+}
+button:hover { background: #fff1de; }
+button:active { transform: translateY(1px); }
+button.danger { background: #f2b8b8; }
+
+/* ---------- 터치 버튼 ---------- */
+#touch-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: min(100%, 640px);
+}
+
+#touch-keys button {
+  padding: 12px 4px;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  user-select: none;
+  touch-action: manipulation;
+}
+#touch-keys button small { font-weight: normal; opacity: .7; font-family: monospace; }
+#touch-keys button.blue { background: #2c4fd6; color: #fff; border-color: #16257a; }
+#touch-keys button.blue:hover { background: #3a5ee6; }
+#touch-keys button.white { background: #fafafa; color: #222; border-color: #888; }
+#touch-keys button.pressed { filter: brightness(.8); transform: translateY(2px); }
+
+#options {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: .95rem;
+}
+#options label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+footer {
+  font-size: .8rem;
+  opacity: .7;
+  text-align: center;
+  max-width: 640px;
+  line-height: 1.6;
+}
+kbd {
+  font-family: monospace;
+  background: #3a2a20;
+  border: 1px solid #6b4d3a;
+  border-radius: 3px;
+  padding: 0 4px;
+}
+
+@media (max-width: 480px) {
+  #touch-keys { grid-template-columns: repeat(2, 1fr); }
+  #touch-keys button { font-size: .95rem; }
+}
+
+footer a { color: #f0b060; }
+
+/* ---------- 게임 선택 (index.html) ---------- */
+#launcher { width: min(100%, 720px); }
+#launcher h1 { text-align: center; font-size: 1.6rem; margin: 8px 0 2px; color: #f4dcbd; }
+#launcher .sub { text-align: center; opacity: .75; margin: 0 0 18px; font-size: .95rem; }
+.games { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.game-card {
+  display: block;
+  text-decoration: none;
+  color: #2a1608;
+  background: var(--wood);
+  border: 3px solid var(--wood-dark);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+  transition: transform .12s, box-shadow .12s;
+}
+.game-card:hover, .game-card:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, .6); outline: none; }
+.game-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; image-rendering: pixelated; border-bottom: 3px solid var(--wood-dark); background: #000; }
+.game-card .body { padding: 12px 14px 14px; }
+.game-card h2 { margin: 0 0 6px; font-size: 1.2rem; }
+.game-card p { margin: 0 0 8px; font-size: .9rem; line-height: 1.5; }
+.game-card .meta { font-size: .8rem; opacity: .7; }
+.game-card .best { font-size: .85rem; font-weight: bold; color: #7a1010; }
+
+/* ---------- 퍼즐 방향 버튼 ---------- */
+#dpad { display: grid; grid-template-columns: repeat(3, 64px); grid-template-rows: repeat(2, 56px); gap: 6px; justify-content: center; }
+#dpad button { font-size: 1.4rem; padding: 0; }
+#dpad [data-dir="up"] { grid-column: 2; grid-row: 1; }
+#dpad [data-dir="left"] { grid-column: 1; grid-row: 2; }
+#dpad [data-dir="down"] { grid-column: 2; grid-row: 2; }
+#dpad [data-dir="right"] { grid-column: 3; grid-row: 2; }
+#puzzle-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+select { font: inherit; padding: 4px 6px; border-radius: 4px; border: 2px solid var(--wood-dark); background: #f4dcbd; color: #2a1608; }
