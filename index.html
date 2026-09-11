@@ -10,13 +10,13 @@
 <main id="app">
   <div id="launcher">
     <h1>Quick Basic 프로그램 보관소</h1>
-    <p class="sub">브니엘고 컴퓨터 서클 돈데크만 시절(1992~1996년) QuickBasic으로 만든 DOS 프로그램을 브라우저에서 다시 실행합니다. 기록은 이 브라우저의 Local Storage에 저장됩니다.</p>
+    <p class="sub"> QuickBasic으로 만든 DOS 프로그램을 브라우저에서 다시 실행합니다. 기록은 이 브라우저의 Local Storage에 저장됩니다.</p>
 
     <div class="programs">
       <a class="program-card" href="flag/index.html">
         <img src="flag/assets/board.png" alt="청기백기 게임 화면">
         <div class="body">
-          <h2>🚩 청기백기</h2>
+          <h2>청기백기</h2>
           <p>음성 명령을 듣고 청기와 백기를 올리고 내리세요. "올리지 마!"에 속으면 안 됩니다. 4번 틀리면 끝.</p>
           <div class="best" id="best-flag"></div>
           <div class="meta">키보드 A / Z / ' / &nbsp;·&nbsp; 원작 FF4.BAS</div>
@@ -26,18 +26,25 @@
       <a class="program-card" href="puzzle/index.html">
         <img src="puzzle/assets/puzzle_screen.png" alt="퍼즐 그림 맞추기 화면">
         <div class="body">
-          <h2>🌹 퍼즐 그림 맞추기</h2>
+          <h2>퍼즐 그림 맞추기</h2>
           <p>3×3 슬라이딩 퍼즐. 흩어진 장미 그림 조각을 화살표 키로 밀어 원래 그림을 완성하세요.</p>
           <div class="best" id="best-puzzle"></div>
           <div class="meta">키보드 ← ↑ → ↓ &nbsp;·&nbsp; 원작 PUZZLE.BAS</div>
         </div>
       </a>
-
+      <a class="program-card" href="paint/index.html">
+        <img src="paint/assets/thumb.png" alt="그림판 화면">
+        <div class="body">
+          <h2>그림판</h2>
+          <p>허큘리스 720×348 흑백 그림판. 원작은 메뉴만 있던 미완성이라 메뉴 이름에 맞춰 기능을 채웠습니다. 원작 .pic 형식도 읽고 씁니다.</p>
+          <div class="meta">Esc 메뉴 · 마우스/터치 &nbsp;·&nbsp; 원작 D2.BAS (1992)</div>
+        </div>
+      </a>
       <a class="program-card" href="bio/index.html">
         <img src="bio/assets/thumb.png" alt="바이오리듬 그래프 화면">
         <div class="body">
-          <h2>📈 바이오리듬</h2>
-          <p>생년월일을 넣으면 건강 23일, 감성 28일, 지성 33일 주기를 텍스트 화면에 $ O # 곡선으로 그립니다. 여러 달치 인쇄 용지도 만듭니다.</p>
+          <h2>바이오리듬</h2>
+          <p>생년월일을 넣으면 건강 23일, 감성 28일, 지성 33일 주기를 텍스트 화면에 $ O # 곡선으로 그립니다. 여러 달치 인쇄 용지도 만듭니다. 1990년 '컴퓨터 쥬니어' 잡지에 실렸던 프로그램을 재구성했습니다. </p>
           <div class="meta">숫자 키 &nbsp;·&nbsp; 원작 BIO.BAS (1993)</div>
         </div>
       </a>
@@ -45,26 +52,44 @@
       <a class="program-card" href="calc/index.html">
         <img src="calc/assets/thumb.png" alt="계산 연습 화면">
         <div class="body">
-          <h2>🧮 계산 연습</h2>
+          <h2>계산 연습</h2>
           <p>암산 연습 세 가지. 항 개수와 자릿수를 정하는 CP, 덧셈·뺄셈 20문제 RANDOM, 곱셈 20문제 MULTI.</p>
           <div class="best" id="best-calc"></div>
           <div class="meta">숫자 + Enter &nbsp;·&nbsp; 원작 CP.BAS (1996), RANDOM·MULTI.BAS (1994)</div>
         </div>
       </a>
 
-      <a class="program-card" href="paint/index.html">
-        <img src="paint/assets/thumb.png" alt="그림판 화면">
+      <a class="program-card" href="calcu/index.html">
+        <img src="calcu/assets/thumb.png" alt="계산기 화면">
         <div class="body">
-          <h2>🖌️ 그림판</h2>
-          <p>허큘리스 720×348 흑백 그림판. 원작은 메뉴만 있던 미완성이라 메뉴 이름에 맞춰 기능을 채웠습니다. 원작 .pic 형식도 읽고 씁니다.</p>
-          <div class="meta">Esc 메뉴 · 마우스/터치 &nbsp;·&nbsp; 원작 D2.BAS (1992)</div>
+          <h2>계산기</h2>
+          <p>숫자를 한 줄씩 넣고 + − × ÷ 키로 다음 줄로 넘어가면 결과가 누적됩니다. 500줄까지 넣고 위아래로 오가며 고칠 수 있는 전표 계산기.</p>
+          <div class="meta">숫자 + 연산자 키 &nbsp;·&nbsp; 원작 CALCU2.BAS (1993)</div>
+        </div>
+      </a>
+
+      <a class="program-card" href="stars/index.html">
+        <img src="stars/assets/thumb.png" alt="3D 별 여행 화면">
+        <div class="body">
+          <h2>3D 별 여행</h2>
+          <p>별이 다가오며 꼬리를 남기고, 시점이 천천히 좌우 위아래로 흔들리는 640×480 우주 비행 화면. 별 개수를 정할 수 있습니다.</p>
+          <div class="meta">Space 멈춤 &nbsp;·&nbsp; 원작 3D.BAS (1995)</div>
+        </div>
+      </a>
+
+      <a class="program-card" href="cba/index.html">
+        <img src="cba/assets/thumb.png" alt="Code can be an art 화면">
+        <div class="body">
+          <h2>Code can be an art</h2>
+          <p>2007년 CC Korea 코드잼 출품작. Loom 주제곡을 PC 스피커로 한 음씩 연주하며 " Code can be an art! "를 한 글자씩 크게 보여 줍니다.</p>
+          <div class="meta">Enter 실행 &nbsp;·&nbsp; 원작 CBA2.BAS (2007, QBasic)</div>
         </div>
       </a>
     </div>
   </div>
 
   <footer>
-    원작: 정상혁 (브니엘고 컴퓨터 서클 돈데크만), 1992~1996년 QuickBasic 4.5. 웹 재구현 2026.
+    Powered by Claude Code
   </footer>
 </main>
 

@@ -1,6 +1,8 @@
 # 프로젝트 메모
 
-1992~1996년 QuickBasic DOS 프로그램(브니엘고 컴퓨터 서클 돈데크만, 정상혁)을 정적 웹페이지로 재구현한 프로젝트다.
+정상혁이 1990년대에 QuickBasic으로 만든 DOS 프로그램과 2007년 QBasic 프로그램을 정적 웹페이지로 재구현한 프로젝트다.
+브니엘고 컴퓨터 서클 돈데크만 시절 작품은 청기백기와 퍼즐 둘뿐이다.
+나머지 페이지 제목이나 설명에 돈데크만을 붙이지 않는다.
 프로그램별 사용법과 파일 구성은 README.md에 있다.
 여기에는 코드만 봐서는 알 수 없는 배경만 적는다.
 
@@ -21,9 +23,19 @@
 - `MKPU.BAS`는 BOARD.SPR을 만든 도구다.
   `VOICE.BAS`, `FLAG2.BAS`는 사운드블라스터 DMA 테스트다.
 - 같은 폴더의 `DUMP*.PCX`, `NECH2.PCX`, `DISK`, `DON.WAV`, `DON3.WAV`, `BUP/WUP.WAV`는 게임에서 쓰지 않는 파일이다.
-- 바이오리듬, 계산 연습, 그림판의 원작은 `../old-com/LAN/QB/`에 있다.
-  `BIO.BAS`, `CP.BAS`, `RANDOM.BAS`, `MULTI.BAS`, `D2.BAS`다.
+- 바이오리듬, 계산 연습, 그림판, 계산기의 원작은 `../old-com/LAN/QB/`에 있다.
+  `BIO.BAS`, `CP.BAS`, `RANDOM.BAS`, `MULTI.BAS`, `D2.BAS`, `CALCU2.BAS`다.
   그림판 관련 루틴은 `READPIC.BAS`(.pic 로더), `BSAVE.BAS`, 격자 편집기 `GE.BAS`다.
+- 3D 별 여행의 원작은 통신 프로그램 폴더 `../old-com/I/3D.BAS`(1995)다.
+  같은 폴더의 `VOI`, `PVO`, `SDSS.BAS`는 사운드블라스터 DMA 테스트다.
+- Code can be an art의 원작은 `old-com`에 없고 블로그 글 https://blog.benelog.net/1230429 (2007-06-01)에 소스가 있다.
+  `cba/cba.js` 머리 주석과 README에 옮겨 적었다.
+- `old-com`의 나머지 .BAS는 옮길 것이 없다.
+  `CAL`(=`MAL`), `WAVE`, `NIBBLES`, `QCARDS`, `SORTDEMO`, `TORUS`, `REMLINE`, `DIR_SCAN`, `CALL_EX`는 Microsoft 샘플이다.
+  `NTYPE`, `PCXVIEW`, `PCX16*`, `ENGFC`, `LIB*/`는 남의 코드나 라이브러리 예제다.
+  `ASDF`, `S12ASC`, `TS`, `DE`, `KINPUT`은 몇 줄짜리 데모나 유틸리티다.
+  `BE`, `MAIN`, `QU`, `TS4`, `TSS*`, `MOUSETE`, `DDD`, `MAKEDATA`는 2KB 이하 바이너리 저장본이고 문자열로 보아 타이틀 화면이나 테스트다.
+  `CSS3`, `BS`, `SCROLL`, `NDV`, `CS.EXE`는 소스가 없다.
 - `LAN/QB/`는 파일마다 한글 인코딩이 다르다.
   `BIO.BAS`는 조합형이라 `iconv -c -f JOHAB -t UTF-8`로 읽는다.
   `BIO.BAS`의 `D4 C9`, `D4 CD` 같은 2바이트 문자는 뒤 바이트가 CP437 선 문자 코드(╔, ═)인 한글 카드용 박스 문자이고 두 칸을 차지한다.
@@ -78,6 +90,12 @@
   항목 끝의 `|` 표시는 Part 영역을 따르는 기능으로 해석했고, Pen 항목은 웹에서 추가했다.
 - 원작에서 `.pic` 그림 파일은 `old-com` 어디에서도 찾지 못했다.
   웹 버전의 `.pic` 인코더는 `READPIC.BAS` 디코더를 거꾸로 만든 것이고 원작 파일로 검증하지 못했다.
+- `CALCU2.BAS`는 `CALCU2.OBJ`로 링크되던 모듈이라 단독 실행 화면색이 없다.
+  `makebox`가 `COLOR 0, 1`로 끝나지만 Esc 처리에서 `COLOR 15, 1`로 되돌리므로 웹은 흰 글자, 파란 바탕 전체 화면으로 정했다.
+  `strnum$`는 모듈 밖 변수라 웹에서는 항상 빈 값으로 본다.
+- Code can be an art의 `PLAY`는 QB 문서대로 옥타브 3을 가운데 C(261.63Hz)로 보았다.
+  실제 QBasic 소리를 녹음해 비교하지는 못했다.
+  SCREEN 2의 글꼴은 IBM PC BIOS 8×8(CP437)로 가정했다.
 
 ## 테스트 방법
 
@@ -85,13 +103,18 @@
   `google-chrome --headless=new --remote-debugging-port=...`를 띄운다.
   Node 내장 `WebSocket`으로 CDP를 직접 호출해 키 입력, 스크린샷, 상태 확인을 한다.
   외부 패키지는 필요 없다.
-- URL 뒤에 `#debug`를 붙이면 `window.__flag`, `__puzzle`, `__bio`, `__calc`, `__paint`로 내부 상태가 노출된다.
+- URL 뒤에 `#debug`를 붙이면 `window.__flag`, `__puzzle`, `__bio`, `__calc`, `__paint`, `__calcu`, `__stars`, `__cba`로 내부 상태가 노출된다.
   테스트 스크립트는 이 훅으로 정답을 읽어 자동 진행했다.
   계산 연습은 `__calc.scr.cells`에서 현재 줄의 문제를 읽었다.
 - 같은 URL에 해시만 바꿔 `Page.navigate`하면 다시 로드되지 않는다.
   먼저 `about:blank`로 이동한 뒤 연다.
 - 그림판의 Load(Dr)는 CDP `DOM.setFileInputFiles`로 `#file-input`에 파일을 넣어 시험했다.
 - 로컬 서버는 `python3 -m http.server`로 충분하다.
+- 헤드리스 Chrome을 띄우기 전에 같은 디버그 포트를 쓰는 예전 Chrome이 남아 있는지 `pgrep -af remote-debugging-port`로 확인한다.
+  2026-09-12에 예전 세션의 Chrome(9333)이 남아 있어서 새 페이지 대신 그쪽 빈 탭에 붙었다.
+- CDP `Runtime.evaluate`에 `awaitPromise`를 켠 채 `__cba.run()` 같은 긴 Promise를 식의 마지막에 두면 끝날 때까지 기다린다.
+  중간 상태를 보려면 `void __cba.run()`처럼 쓴다.
+- 테스트 스크립트(harness, 세 페이지 시험, 썸네일 캡처)는 세션 임시 폴더에만 있었다.
 - `<audio>`, `<img>` 요소를 쓰므로 `file://`로 열어도 동작한다.
 
 ## 결정 사항

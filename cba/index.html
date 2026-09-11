@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code can be an art - Quick Basic 프로그램 보관소</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+  <div id="stage">
+    <canvas id="screen" width="640" height="400" aria-label="Code can be an art 화면"></canvas>
+  </div>
+
+  <p id="status" class="status" aria-live="polite"></p>
+
+  <div id="options">
+    <button type="button" id="btn-run">▶ 실행 (qbasic /run cba2.bas)</button>
+    <label><input type="checkbox" id="opt-sound" checked> 소리 (PC 스피커 PLAY)</label>
+  </div>
+
+  <footer>
+    원작: 정상혁 (2007년, QBasic, CBA2.BAS). 웹 재구현 2026.
+    2007년 Creative Commons Korea "Code can be an art" 행사의 코드잼에 낸 프로그램입니다.
+    글자마다 게임 Loom의 주제곡 한 음을 PC 스피커로 연주한 뒤 8×8 글꼴의 점을 큰 네모로 키워 보여 줍니다.
+    글은 <a href="https://blog.benelog.net/1230429" target="_blank" rel="noopener">QB로 만든 Code can be an art 출력</a>에 있습니다.
+    <br><a href="../index.html">← 프로그램 목록으로</a>
+  </footer>
+</main>
+
+<script src="cba.js"></script>
+</body>
+</html>

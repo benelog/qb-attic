@@ -1,6 +1,7 @@
 # Quick Basic 프로그램 보관소 (qb-attic)
 
-정상혁(브니엘고 컴퓨터 서클 "돈데크만")이 1992~1996년에 QuickBasic 4.5로 만든 DOS 프로그램을 정적 웹페이지로 다시 구현한 것입니다.
+정상혁이 1990년대에 QuickBasic 4.5로 만든 DOS 프로그램과 2007년에 QBasic으로 만든 프로그램을 정적 웹페이지로 다시 구현한 것입니다.
+청기백기와 퍼즐은 브니엘고 컴퓨터 서클 "돈데크만" 시절(1995~1996년)의 작품이고, 나머지는 개인적으로 만든 것입니다.
 `index.html`에서 고릅니다.
 
 | 페이지 | 프로그램 | 원작 |
@@ -10,10 +11,13 @@
 | `bio/index.html` | 바이오리듬 | `LAN/QB/BIO.BAS` (1993) |
 | `calc/index.html` | 계산 연습 (CP, RANDOM, MULTI) | `LAN/QB/CP.BAS` (1996), `RANDOM.BAS`, `MULTI.BAS` (1994) |
 | `paint/index.html` | 그림판 | `LAN/QB/D2.BAS` (1992) |
+| `calcu/index.html` | 계산기 (전표식 누적 계산) | `LAN/QB/CALCU2.BAS` (1993) |
+| `stars/index.html` | 3D 별 여행 | `I/3D.BAS` (1995) |
+| `cba/index.html` | Code can be an art | `CBA2.BAS` (2007, QBasic. [블로그 글](https://blog.benelog.net/1230429)) |
 
 청기백기와 퍼즐은 원작의 그림(`DGI.GIF`, `LOGO.GIF`, `M3.GIF`), 스프라이트(`*.SPR`),
 음성 명령(`B1~B12.WAV`, `START.WAV`, `DON2.WAV`)을 그대로 변환해서 사용합니다.
-나머지 세 개는 그림 파일이 없는 프로그램이라 원작 코드의 화면 출력을 그대로 옮겼습니다.
+나머지는 그림 파일이 없는 프로그램이라 원작 코드의 화면 출력을 그대로 옮겼습니다.
 청기백기 소스 여러 벌(데모판 `FLV2.BAS`, `FLAGV.BAS`, `NEWFF4.BAS`와 준비 코드)의 차이는 `flag/history.md`에 정리했습니다.
 
 ## 실행
@@ -142,6 +146,58 @@ python3 -m http.server 8000
   이름 붙여 저장한 그림은 `paint.files`, 조각은 `paint.part` 키에 있습니다.
 - 화면 색은 녹색, 호박색, 흑백 모니터 중에서 고릅니다.
 
+## 계산기 (calcu/)
+
+원작 `CALCU2.BAS`(1993)는 전표처럼 숫자를 한 줄씩 적어 내려가며 결과를 누적하는 계산기입니다.
+큰 프로그램의 모듈(`CALCU2.OBJ`)로 쓰인 코드라 화면 색을 정하지 않습니다.
+Esc 취소 처리에서 `COLOR 15, 1`로 되돌리는 것을 보고 흰 글자, 파란 바탕을 기본으로 삼았습니다.
+
+- 숫자를 치고 `+` `-` `*` `/` 키를 누르면 그 연산자가 다음 줄 앞에 붙고 줄이 넘어갑니다.
+  줄 앞의 연산자는 그 줄의 값을 결과에 더하거나 빼거나 곱하거나 나눕니다.
+  연산자가 없는 줄(첫 줄)은 더합니다.
+- `Enter`는 원작대로 아무 일도 하지 않습니다.
+  `↑` `↓`로 줄을 오가며 값을 고칠 수 있고, `Tab`은 현재 줄의 연산자만 바꿉니다.
+  `Home` `End` `Del` `Backspace`로 줄 안을 편집합니다.
+  숫자와 기호(ASCII 58 이하)만 받고 글자 키는 삐 소리와 함께 무시합니다.
+- 500줄까지 넣을 수 있고 화면에는 14줄이 보입니다.
+- `Esc`를 두 번 누르면 끝납니다.
+  값이 1조를 넘거나 결과가 10조를 넘으면 원작처럼 키를 기다렸다가 끝냅니다.
+  0으로 나누면 QB 런타임 에러("Division by zero")로 멈춥니다.
+- 원작의 버릇도 그대로입니다.
+  줄을 옮기면 값이 `STR$` 형식(왼쪽 정렬)으로 다시 찍히고, `VAL`이 공백을 모두 지우므로 `75   99`는 7599가 됩니다.
+- 화면 아래 버튼은 모바일용으로 같은 키를 넣습니다.
+
+## 3D 별 여행 (stars/)
+
+원작 `3D.BAS`(1995)는 SCREEN 12(640×480)에서 별이 다가오는 우주 비행 화면입니다.
+
+- 별은 앞 거리 1600에서 태어나 매 프레임 15씩 다가오고, 거리 600 안으로 들어오면 밝은 색이 됩니다.
+  이전 위치에서 새 위치로 선을 긋고 다음 프레임에 지워서 짧은 꼬리가 생깁니다.
+- 시점은 좌우와 위아래로 천천히 흔들립니다.
+  회전 목표가 가끔 400, 0, -400 중 하나로 바뀌고 각도가 그쪽으로 1씩 움직입니다.
+- 원작은 명령행 인자로 별 개수를 받았고 아무 키나 누르면 끝났습니다.
+  웹 버전은 별 개수 입력(주소에 `?n=100`도 됨)과 속도(30/60/120fps)를 두었고 `Space`나 화면 누르기로 멈춥니다.
+  원작은 프레임 제한이 없어 CPU 속도대로 돌아갔습니다.
+- `WINDOW SCREEN (-40, 30)-(40, -30)`은 SCREEN 옵션 때문에 작은 y가 위입니다.
+  웹 버전도 QB 규칙대로 그렸습니다.
+- 픽셀 단위 선 긋기를 직접 구현해 원작처럼 계단이 보입니다.
+
+## Code can be an art (cba/)
+
+2007년 Creative Commons Korea "Code can be an art" 행사의 코드잼 출품작입니다.
+소스는 [블로그 글](https://blog.benelog.net/1230429)에 있고 Windows XP의 QBasic으로 `qbasic /run cba2.bas`로 실행했습니다.
+
+- SCREEN 2(640×200 흑백)에서 `" Code can be an art! "`를 한 글자씩 보여 줍니다.
+  글자마다 `PLAY`로 음 하나를 연주한 뒤(끝날 때까지 기다림) 화면을 지우고 글자를 (1,1)에 찍어 `POINT`로 8×8 점을 읽고, 점마다 61×31 네모로 키워 그립니다.
+- 음은 게임 Loom의 주제곡을 기억으로 옮긴 것입니다.
+  `T90 O1`이라 낮게 울리고 전체 21음이 12초입니다.
+- 웹 버전은 `PLAY` 문자열(T, O, L, <, >, N, P, 음표, #/+/-, 점, MN/ML/MS)을 해석해 Web Audio 사각파로 냅니다.
+  QB처럼 옥타브 3이 가운데 C이고, 음 길이의 7/8만 소리를 냅니다.
+- 8×8 글꼴은 IBM PC BIOS(CP437) 글꼴이고 이 프로그램이 쓰는 글자만 넣었습니다.
+- 처음 화면은 DOS 프롬프트 흉내이고 `Enter`, 버튼, 화면 누르기로 실행합니다.
+  끝나면 원작의 `SCREEN 0`처럼 프롬프트로 돌아옵니다.
+  소리는 브라우저 정책상 사용자가 누른 뒤에만 납니다.
+
 ## 파일 구성
 
 ```
@@ -157,16 +213,19 @@ flag/assets/snd/opening.wav 로고 화면 음성 (DON2.WAV)
 puzzle/index.html, puzzle.js      퍼즐 그림 맞추기
 puzzle/assets/puzzle_screen.png   원작 M3.GIF (퍼즐 화면, 조각은 여기서 잘라 씀)
 puzzle/assets/puzzle_blank.png    원작 BOARD.SPR (빈 칸, M3.GIF 팔레트로 디코딩)
-textscreen.js               QB 텍스트 화면(80x25, PRINT/INPUT/INKEY$) 흉내. 바이오리듬과 계산 연습이 함께 씀
+textscreen.js               QB 텍스트 화면(80x25, PRINT/INPUT/INKEY$) 흉내. 바이오리듬, 계산 연습, 계산기가 함께 씀
 bio/index.html, bio.js      바이오리듬
 calc/index.html, calc.js    계산 연습 (CP, RANDOM, MULTI)
 paint/index.html, paint.js  그림판
+calcu/index.html, calcu.js  계산기 (CALCU2)
+stars/index.html, stars.js  3D 별 여행
+cba/index.html, cba.js      Code can be an art (PLAY 해석기와 8×8 글꼴 포함)
 */assets/thumb.png          프로그램 목록의 카드 그림 (웹 버전 화면을 캡처)
 flag/history.md             청기백기 소스 버전 비교
 ```
 
 Local Storage 키: `flag-game.ranking`, `flag-game.options`, `puzzle-game.ranking`, `puzzle-game.options`,
-`calc-game.ranking`, `calc-game.options`, `paint.files`, `paint.current`, `paint.part`, `paint.options`,
+`calc-game.ranking`, `calc-game.options`, `paint.files`, `paint.current`, `paint.part`, `paint.options`, `stars.options`,
 `flag-game.lastName`(마지막에 입력한 이름, 청기백기·퍼즐·계산 연습이 공유).
 
 ## 참고: 청기백기 음성 파일과 명령의 대응

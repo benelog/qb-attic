@@ -52,6 +52,10 @@
     '─': ['LcRc'], '│': ['cTcB'], '┌': ['cBcc', 'ccRc'], '┐': ['Lccc', 'cccB'], '└': ['cTcc', 'ccRc'],
     '┘': ['Lccc', 'cccT'], '┼': ['LcRc', 'cTcB'], '├': ['cTcB', 'ccRc'], '┤': ['cTcB', 'Lccc'],
     '┬': ['LcRc', 'cccB'], '┴': ['LcRc', 'cccT'],
+    // 굵은 선(CP949 A6AC~): 굵게 그릴 획은 소문자 h 접두어
+    '━': ['hLcRc'], '┃': ['hcTcB'], '┏': ['hcBcc', 'hccRc'], '┓': ['hLccc', 'hcccB'],
+    '┗': ['hcTcc', 'hccRc'], '┛': ['hLccc', 'hcccT'],
+    '┒': ['Lccc', 'hcccB'], '┕': ['hcTcc', 'ccRc'], '┍': ['cBcc', 'hccRc'], '┙': ['hLccc', 'cccT'],
   };
 
   class TextScreen {
@@ -71,6 +75,8 @@
       this.line = null;            // INPUT 줄 편집 상태
       this.gen = 0;
       this.onKey = opts.onKey || null;
+      this.captureTab = !!opts.captureTab;   // true면 Tab 키도 프로그램에 전달한다
+      this.manualCursor = null;              // { row, col } LOCATE ,,1 커서
 
       this.kbd = document.createElement('input');
       Object.assign(this.kbd, { type: 'text', autocomplete: 'off', spellcheck: false });
@@ -110,6 +116,7 @@
       this.gen++;
       this.keys = [];
       this.cursorOn = false;
+      this.manualCursor = null;
       if (this.line) { const l = this.line; this.line = null; clearTimeout(l.timer); l.reject(new Abort()); }
       if (this.waiter) { const w = this.waiter; this.waiter = null; w.reject(new Abort()); }
     }
@@ -262,7 +269,8 @@
         const m = /^Key([A-Z])$/.exec(e.code || '');
         if (m) key = m[1].toLowerCase();
       }
-      if (['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab'].includes(key)) return;
+      if (['Shift', 'Control', 'Alt', 'Meta', 'CapsLock'].includes(key)) return;
+      if (key === 'Tab' && !this.captureTab) return;
       e.preventDefault();
       this._pushKey(key === 'Enter' ? '\r' : key === 'Escape' ? '\x1b' : key === 'Backspace' ? '\b' : key);
     }
@@ -272,6 +280,9 @@
       else { this.keys.push(k); if (this.keys.length > 16) this.keys.shift(); }
     }
     // INKEY$ (기다리지 않는다)
+    pushKey(k) { this._pushKey(k); }
+    showCursor(row, col) { this.manualCursor = { row, col }; this.cursorOn = true; this.dirty = true; }
+    hideCursor() { this.manualCursor = null; if (!this.line) this.cursorOn = false; this.dirty = true; }
     inkey() { return this.keys.length ? this.keys.shift() : ''; }
     // WHILE INKEY$ = "": WEND  (키를 기다린다)
     getKey() {
@@ -315,9 +326,11 @@
           else ctx.fillText(cell.ch, x + (CW * w) / 2, y + CH / 2 + 1);
         }
       }
-      if (this.cursorOn && this._blink && this.line) {
+      if (this.cursorOn && this._blink && (this.line || this.manualCursor)) {
+        const cr = this.line ? this.cursorRow : this.manualCursor.row;
+        const cc = this.line ? this.cursorCol : this.manualCursor.col;
         ctx.fillStyle = PALETTE[7];
-        ctx.fillRect((this.cursorCol - 1) * CW, (this.cursorRow - 1) * CH + CH - 3, CW, 2);
+        ctx.fillRect((cc - 1) * CW, (cr - 1) * CH + CH - 3, CW, 2);
       }
     }
     _box(ch, x, y, w, h) {
@@ -325,13 +338,17 @@
       const cx = x + w / 2, cy = y + h / 2, d = 2;
       const X = { L: x, R: x + w, c: cx, a: cx - d, b: cx + d };
       const Y = { T: y, B: y + h, c: cy, a: cy - d, b: cy + d };
-      ctx.lineWidth = 1.2;
-      ctx.beginPath();
-      for (const s of BOX[ch]) {
-        ctx.moveTo(X[s[0]], Y[s[1]]);
-        ctx.lineTo(X[s[2]], Y[s[3]]);
+      for (const heavy of [false, true]) {
+        ctx.lineWidth = heavy ? 3 : 1.2;
+        ctx.beginPath();
+        for (let s of BOX[ch]) {
+          if ((s[0] === 'h') !== heavy) continue;
+          if (heavy) s = s.slice(1);
+          ctx.moveTo(X[s[0]], Y[s[1]]);
+          ctx.lineTo(X[s[2]], Y[s[3]]);
+        }
+        ctx.stroke();
       }
-      ctx.stroke();
     }
   }
 

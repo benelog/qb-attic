@@ -246,3 +246,9 @@ select { font: inherit; padding: 4px 6px; border-radius: 4px; border: 2px solid 
 .file-list li small { opacity: .7; }
 .panel label.block { display: block; margin: 6px 0; }
 #panel-save input[type="text"], .file-list input[type="text"] { font: inherit; padding: 6px 8px; border: 2px solid var(--wood-dark); border-radius: 4px; background: #fff7ea; width: 100%; }
+
+/* ---------- 계산기 (calcu/) 편집 키 ---------- */
+.key-row { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; width: min(100%, 640px); }
+.key-row button { padding: 6px 10px; min-width: 2.6em; font-size: .95rem; font-family: monospace; }
+#options input[type="number"] { font: inherit; padding: 4px 6px; border-radius: 4px; border: 2px solid var(--wood-dark); background: #f4dcbd; color: #2a1608; }
+footer code { font-family: monospace; background: #3a2a20; border-radius: 3px; padding: 0 4px; }
