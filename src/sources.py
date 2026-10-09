@@ -18,7 +18,7 @@ NOTES = '''
   뺀 파일은 해당 페이지의 "정리하면서 뺀 파일"에 적었습니다.
 - 내용이 똑같은 사본 `FLAG2.BAS`(= `VOICE.BAS`), `BE.BAS`(= `GE.BAS`)는 하나만 옮겼습니다.
 - Microsoft 예제(`QCARDS`, `SORTDEMO`, `TORUS`, `REMLINE`, `CAL`/`MAL`, `WAVE`, `DIR_SCAN`, `CALL_EX`)는 옮기지 않았습니다.
-- SVGAQB 라이브러리 배포본, `PCX2`, `LIB`, `LIB2`, `LIB3` 폴더의 라이브러리, 남이 짠 `NTYPE`, `PCX16`, `PCX16F`, `PCXVIEW`, `KINPUT`도 옮기지 않았습니다.
+- SVGAQB 라이브러리 배포본, `PCX2`, `LIB`, `LIB2`, `LIB3` 폴더의 라이브러리, 남이 짠 `NTYPE`, `PCX16`, `PCX16F`, `PCXVIEW`도 옮기지 않았습니다.
   `GREAD.BAS`는 SVGAQB 설명서의 GIF 예제를 그대로 옮긴 것이라 뺐습니다.
 '''
 
@@ -377,6 +377,24 @@ SCREEN 3에서 `CALL mouse(1, ...)`로 마우스 커서를 켜 보려던 시험�
 그림은 `DATA`에 적은 `GET` 배열입니다.
 [격자 스프라이트 편집기](sprite-grid-editor.html)로 만든 20×20 그림을 이렇게 썼습니다.
 게임 화면의 벽을 그려 보던 시험으로 보입니다.
+''',
+    ),
+    dict(
+        group='etc', file='line-input.bas', orig='LAN/QB/KINPUT.BAS', date='1993-07-04', size=6139, format=TEXT,
+        title='한 줄 입력 SUB (Kinput)',
+        summary='INPUT 대신 쓰려고 만든 한 줄 편집 SUB. 보이는 폭보다 긴 글을 옆으로 밀며 고칠 수 있습니다.',
+        desc='''
+`INPUT` 대신 쓸 한 줄 입력 루틴 `Kinput`과, 그것을 한 번 불러 보는 짧은 시험 코드입니다.
+`Kinput Ans$, 화면 폭, 최대 글자 수, 삽입 여부`로 부르고, 주석에 인자의 뜻을 적어 두었습니다.
+
+- 커서가 있는 줄과 칸에서 입력을 받습니다.
+  화면 폭(`PrCan`)보다 긴 글은 커서 위치에 맞춰 보이는 부분을 옆으로 밉니다.
+- `←` `→` `Home` `End`로 커서를 옮기고 `Backspace`, `Del`로 지웁니다.
+- `Ins` 키로 삽입 모드와 수정(덮어쓰기) 모드를 바꾸고, 모드에 따라 커서 모양이 달라집니다.
+- 최대 글자 수(`Can`)를 넘으면 마지막 입력을 되돌립니다.
+- `Enter`, `Esc`, `↑`, `↓`를 누르면 끝납니다.
+  `↑` `↓`로도 끝나는 것은 여러 입력 칸을 오가는 화면에 쓰려던 것으로 보입니다.
+- 글자를 1바이트씩 다루므로 한글 2바이트를 한 글자로 묶어 처리하지는 않습니다.
 ''',
     ),
     dict(

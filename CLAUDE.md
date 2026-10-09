@@ -13,7 +13,7 @@
 
 ## 원작 소스 위치
 
-- 옛 PC의 `C:\FLAG`, `C:\LAN\QB`에 있던 직접 짠 소스 31개는 2026-10-09에 `src/`로 옮겼다.
+- 옛 PC의 `C:\FLAG`, `C:\LAN\QB`에 있던 직접 짠 소스 32개는 2026-10-09에 `src/`로 옮겼다.
   이름을 바꾸고 UTF-8로 바꿨으며 원래 경로, 날짜, 크기는 `src/sources.py`에 있다.
   설명 페이지는 `python3 src/build.py`로 다시 만든다.
 - 옮긴 뒤 형제 디렉터리 `../old-com/c-drive/FLAG/`와 `../old-com/c-drive/LAN/QB/`는 지웠다.
@@ -26,8 +26,9 @@
   버전 비교는 `flag/history.md`에 있다.
   PCX 뷰어는 SVGAQB판(`PCX-SV`, `PCXREAD2`)만, 텍스트 화면 저장은 `TSS`만 두었다.
   `FLAG2`(=`VOICE`), `BE`(=`GE`)는 같은 파일이다.
-- 옮기지 않은 것: Microsoft 샘플(`CAL`=`MAL`, `WAVE`, `QCARDS`, `SORTDEMO`, `TORUS`, `REMLINE`, `DIR_SCAN`, `CALL_EX`), SVGAQB 배포본, `PCX2`, `LIB*/`, 남의 코드(`NTYPE`, `PCXVIEW`, `PCX16*`, `KINPUT`), SVGAQB 설명서 예제를 그대로 옮긴 `GREAD`.
-  `KINPUT`은 남에게 설명하는 한글 주석과 코드 모양으로 보아 남의 코드로 판단했다.
+- 옮기지 않은 것: Microsoft 샘플(`CAL`=`MAL`, `WAVE`, `QCARDS`, `SORTDEMO`, `TORUS`, `REMLINE`, `DIR_SCAN`, `CALL_EX`), SVGAQB 배포본, `PCX2`, `LIB*/`, 남의 코드(`NTYPE`, `PCXVIEW`, `PCX16*`), SVGAQB 설명서 예제를 그대로 옮긴 `GREAD`.
+  `KINPUT`(→`line-input`)은 한때 남의 코드로 잘못 보고 뺐다가 사용자가 직접 짠 것이라고 해서 2026-10-09에 추가했다.
+  설명하는 투의 한글 주석만 보고 작성자를 판단하지 않는다.
 - `BIO.BAS`는 조합형이었다.
   `D4 C9`, `D4 CD` 같은 2바이트 문자는 뒤 바이트가 CP437 선 문자 코드(╔, ═)인 한글 카드용 박스 문자이고 두 칸을 차지한다.
   `src/biorhythm.bas`에서는 한 칸짜리 유니코드 선 문자로 바꿨다.
