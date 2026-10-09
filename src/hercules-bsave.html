@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>허큘리스 화면 BSAVE 시험 소스</title>
+<meta name="description" content="허큘리스 그래픽 화면 메모리(B000:0000부터 32KB)를 파일로 저장합니다.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+<div class="src-page">
+<nav class="crumb"><a href="index.html">← 소스 목록</a></nav>
+<h1>허큘리스 화면 BSAVE 시험</h1>
+<p class="sub"><code>hercules-bsave.bas</code></p>
+<dl class="src-meta"><dt>원래 파일</dt><dd><code>LAN/QB/BSAVE.BAS</code></dd><dt>날짜</dt><dd>1991-10-08</dd><dt>크기</dt><dd>479바이트, 7줄</dd><dt>저장 형식</dt><dd>QB 4.5 바이너리 저장본(&quot;Fast Load and Save&quot;)을 QB에서 텍스트로 다시 저장한 뒤 UTF-8로 바꿈</dd><dt>내려받기</dt><dd><a href="hercules-bsave.bas" download>hercules-bsave.bas</a> (UTF-8)</dd></dl>
+<h2>설명</h2>
+<p>SCREEN 3에 선과 원을 그린 뒤 <code>DEF SEG = &amp;HB000</code>, <code>BSAVE &quot;ae&quot;, 0, &amp;H8000</code>으로 화면 메모리를 통째로 저장합니다.<br>
+<a href="paint.html">그림판</a>의 <code>SBSAVE</code>가 같은 방법을 씁니다.</p>
+
+<h2>소스</h2>
+<pre class="src-code"><code><span class="ln"><span class="k">SCREEN</span> <span class="n">3</span></span><span class="ln"><span class="k">CLS</span></span><span class="ln"><span class="k">LINE</span> (<span class="n">10</span>, <span class="n">10</span>)-(<span class="n">100</span>, <span class="n">100</span>)</span><span class="ln"><span class="k">CIRCLE</span> (<span class="n">200</span>, <span class="n">200</span>), <span class="n">10</span></span><span class="ln"><span class="k">DEF</span> <span class="k">SEG</span> = <span class="n">&amp;HB000</span></span><span class="ln"><span class="k">BSAVE</span> <span class="s">&quot;ae&quot;</span>, <span class="n">0</span>, <span class="n">&amp;H8000</span></span><span class="ln"><span class="k">DEF</span> <span class="k">SEG</span></span></code></pre>
+</div>
+<footer><a href="../index.html">프로그램 목록</a> · <a href="index.html">소스 목록</a></footer>
+</main>
+</body>
+</html>

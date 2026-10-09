@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>계산 연습 MULTI 소스</title>
+<meta name="description" content="0~99 × 0~9 곱셈 20문제.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+<div class="src-page">
+<nav class="crumb"><a href="index.html">← 소스 목록</a></nav>
+<h1>계산 연습 MULTI</h1>
+<p class="sub"><code>calc-multiply.bas</code></p>
+<dl class="src-meta"><dt>원래 파일</dt><dd><code>LAN/QB/MULTI.BAS</code></dd><dt>날짜</dt><dd>1994-09-07</dd><dt>크기</dt><dd>739바이트, 17줄</dd><dt>저장 형식</dt><dd>QB 4.5 바이너리 저장본(&quot;Fast Load and Save&quot;)을 QB에서 텍스트로 다시 저장한 뒤 UTF-8로 바꿈</dd><dt>웹 버전</dt><dd><a href="../calc/index.html">계산 연습</a></dd><dt>내려받기</dt><dd><a href="calc-multiply.bas" download>calc-multiply.bas</a> (UTF-8)</dd></dl>
+<h2>설명</h2>
+<p><a href="calc-add-sub.html">덧셈·뺄셈 20문제</a>를 곱셈으로 바꾼 것입니다.<br>
+0~99와 0~9를 곱하는 문제를 20개 냅니다.</p>
+
+<h2>소스</h2>
+<pre class="src-code"><code><span class="ln"><span class="k">CLS</span></span><span class="ln"><span class="k">RANDOMIZE</span> <span class="k">TIMER</span></span><span class="ln"><span class="k">FOR</span> i = <span class="n">1</span> <span class="k">TO</span> <span class="n">20</span></span><span class="ln">a = <span class="k">INT</span>(<span class="k">RND</span> * <span class="n">100</span>)</span><span class="ln">b = <span class="k">INT</span>(<span class="k">RND</span> * <span class="n">10</span>)</span><span class="ln"></span><span class="ln"> <span class="k">PRINT</span> a; <span class="s">&quot;X&quot;</span>; b; <span class="s">&quot;=&quot;</span>;</span><span class="ln"> ca = a * b</span><span class="ln"></span><span class="ln"><span class="k">INPUT</span> c</span><span class="ln"><span class="k">IF</span> c = ca <span class="k">THEN</span></span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;Ok&quot;</span></span><span class="ln">s = s + <span class="n">1</span></span><span class="ln"><span class="k">END</span> <span class="k">IF</span></span><span class="ln"><span class="k">IF</span> ca &lt;&gt; c <span class="k">THEN</span> <span class="k">PRINT</span> <span class="s">&quot;no,correct answer is &quot;</span>; ca</span><span class="ln"><span class="k">NEXT</span> i</span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;Total Correct answer is &quot;</span>; s</span></code></pre>
+</div>
+<footer><a href="../index.html">프로그램 목록</a> · <a href="index.html">소스 목록</a></footer>
+</main>
+</body>
+</html>

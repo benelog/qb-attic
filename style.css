@@ -252,3 +252,48 @@ select { font: inherit; padding: 4px 6px; border-radius: 4px; border: 2px solid 
 .key-row button { padding: 6px 10px; min-width: 2.6em; font-size: .95rem; font-family: monospace; }
 #options input[type="number"] { font: inherit; padding: 4px 6px; border-radius: 4px; border: 2px solid var(--wood-dark); background: #f4dcbd; color: #2a1608; }
 footer code { font-family: monospace; background: #3a2a20; border-radius: 3px; padding: 0 4px; }
+
+/* ---------- 원작 소스 (src/) ---------- */
+.src-page { width: min(100%, 860px); line-height: 1.6; }
+.src-page h1 { font-size: 1.6rem; margin: 6px 0 0; color: #f4dcbd; }
+.src-page h2 { font-size: 1.15rem; margin: 26px 0 8px; color: #f4dcbd; border-bottom: 1px solid #5a3e2c; padding-bottom: 4px; }
+.src-page .sub { margin: 0 0 14px; opacity: .75; }
+.src-page a { color: #f0b060; }
+.src-page code { font-family: "D2Coding", "Nanum Gothic Coding", "Noto Sans Mono CJK KR", monospace; font-size: .92em; background: #3a2a20; border-radius: 3px; padding: 0 4px; }
+.src-page ul { padding-left: 1.3em; }
+.src-page li { margin: 4px 0; }
+.crumb { font-size: .9rem; }
+.src-meta { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; padding: 10px 14px; background: #2a1e17; border: 1px solid #5a3e2c; border-radius: 6px; font-size: .92rem; }
+.src-meta dt { opacity: .7; }
+.src-meta dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.src-code {
+  margin: 0;
+  padding: 10px 0;
+  background: #000080;
+  color: #e8e8e8;
+  border: 3px solid var(--wood-dark);
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.45;
+  counter-reset: ln;
+}
+.src-code code { background: none; padding: 0; font-size: inherit; display: block; min-width: max-content; }
+.src-code .ln { display: block; padding-right: 14px; }
+.src-code .ln::before { counter-increment: ln; content: counter(ln); display: inline-block; width: 3.2em; padding-right: 1em; margin-right: .8em; text-align: right; color: #7f86c8; border-right: 1px solid #3a3aa0; user-select: none; }
+.src-code .k { color: #ffffff; font-weight: bold; }
+.src-code .s { color: #ffd75f; }
+.src-code .c { color: #8fd18f; }
+.src-code .n { color: #7fd7ff; }
+.src-list { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.src-list th, .src-list td { text-align: left; vertical-align: top; padding: 7px 8px; border-bottom: 1px solid #4a3426; }
+.src-list th { opacity: .7; font-weight: normal; }
+.src-list td:nth-child(2), .src-list td:nth-child(3), .src-list td:first-child code { white-space: nowrap; }
+@media (max-width: 560px) {
+  .src-list thead { display: none; }
+  .src-list tr { display: block; padding: 8px 0; border-bottom: 1px solid #4a3426; }
+  .src-list td { display: inline; border: 0; padding: 0 6px 0 0; }
+  .src-list td:first-child, .src-list td:last-child { display: block; }
+}
+.src-link { text-align: center; font-size: .95rem; margin: 22px 0 0; opacity: .9; }
+.src-link a { color: #f0b060; font-weight: bold; }

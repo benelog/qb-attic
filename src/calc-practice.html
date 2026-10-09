@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>계산 연습 CP 소스</title>
+<meta name="description" content="&quot;Calculation Practice Trainer&quot;. 항 개수와 자릿수를 정해 덧셈·뺄셈 암산 문제를 냅니다.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+<div class="src-page">
+<nav class="crumb"><a href="index.html">← 소스 목록</a></nav>
+<h1>계산 연습 CP</h1>
+<p class="sub"><code>calc-practice.bas</code></p>
+<dl class="src-meta"><dt>원래 파일</dt><dd><code>LAN/QB/CP.BAS</code></dd><dt>날짜</dt><dd>1996-03-02</dd><dt>크기</dt><dd>1,580바이트, 47줄</dd><dt>저장 형식</dt><dd>QB 4.5 바이너리 저장본(&quot;Fast Load and Save&quot;)을 QB에서 텍스트로 다시 저장한 뒤 UTF-8로 바꿈</dd><dt>웹 버전</dt><dd><a href="../calc/index.html">계산 연습</a></dd><dt>내려받기</dt><dd><a href="calc-practice.bas" download>calc-practice.bas</a> (UTF-8)</dd></dl>
+<h2>설명</h2>
+<p><code>+ 12 - 5 + 7</code> 같은 여러 항의 덧셈·뺄셈 문제를 내는 암산 연습기입니다.<br>
+항 개수, 자릿수, 문제 수, 문제당 시간을 차례로 입력받습니다.</p>
+<ul><li>끝나면 맞힌 개수와 백분율을 보여 주고 <code>CLEAR</code> 뒤 처음부터 다시 합니다.</li><li>문제당 시간을 입력받지만 코드는 그 값을 쓰지 않습니다.</li><li>&quot;your correc answer is&quot; 같은 오타도 원문 그대로입니다.</li></ul>
+<p><a href="calc-add-sub.html">덧셈·뺄셈 20문제</a>를 일반화한 판입니다.</p>
+
+<h2>소스</h2>
+<pre class="src-code"><code><span class="ln"><span class="k">CLS</span></span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;                   ****** Calculation Practice Trainer *****&quot;</span></span><span class="ln"><span class="k">PRINT</span></span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;                                          Programmed by Jung-Sang-Hyuk&quot;</span></span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;                                                Version 1.0&quot;</span></span><span class="ln"></span><span class="ln"><span class="k">DO</span></span><span class="ln"><span class="k">RANDOMIZE</span> <span class="k">TIMER</span></span><span class="ln"><span class="k">INPUT</span> <span class="s">&quot;XX+XX+XX ...&quot;</span>, hs</span><span class="ln"><span class="k">INPUT</span> <span class="s">&quot;XXXX........&quot;</span>, js</span><span class="ln"><span class="k">INPUT</span> <span class="s">&quot;How many problems do you want to solve?&quot;</span>, mh</span><span class="ln"><span class="k">INPUT</span> <span class="s">&quot;How long do you take to solve a problem?&quot;</span>, tm</span><span class="ln"><span class="k">DIM</span> pb(hs), cas(mh), mj$(mh)</span><span class="ln"><span class="k">FOR</span> j = <span class="n">1</span> <span class="k">TO</span> mh</span><span class="ln"> <span class="k">FOR</span> i = <span class="n">1</span> <span class="k">TO</span> hs</span><span class="ln"> pb(i) = <span class="k">INT</span>(<span class="k">RND</span> * <span class="n">10</span> ^ js)</span><span class="ln"> bh = <span class="k">INT</span>(<span class="k">RND</span> * <span class="n">2</span>)</span><span class="ln"> <span class="k">IF</span> bh = <span class="n">0</span> <span class="k">THEN</span></span><span class="ln">  b$ = <span class="s">&quot;+&quot;</span></span><span class="ln">  cas(j) = cas(j) + pb(i)</span><span class="ln"> <span class="k">END</span> <span class="k">IF</span></span><span class="ln"> <span class="k">IF</span> bh = <span class="n">1</span> <span class="k">THEN</span></span><span class="ln">  b$ = <span class="s">&quot;-&quot;</span></span><span class="ln">  cas(j) = cas(j) - pb(i)</span><span class="ln"> <span class="k">END</span> <span class="k">IF</span></span><span class="ln"> mj$(j) = mj$(j) + <span class="s">&quot; &quot;</span> + b$ + <span class="k">STR$</span>(pb(i))</span><span class="ln"> <span class="k">NEXT</span> i</span><span class="ln"> <span class="k">NEXT</span> j</span><span class="ln"></span><span class="ln"> <span class="k">FOR</span> i = <span class="n">1</span> <span class="k">TO</span> mh</span><span class="ln"> <span class="k">PRINT</span> mj$(i); <span class="s">&quot;  &quot;</span>;</span><span class="ln"> <span class="k">INPUT</span> A</span><span class="ln"> <span class="k">IF</span> A = cas(i) <span class="k">THEN</span></span><span class="ln"> <span class="k">PRINT</span> <span class="s">&quot;OK&quot;</span></span><span class="ln"> cr = cr + <span class="n">1</span></span><span class="ln"> <span class="k">ELSE</span> <span class="k">PRINT</span> <span class="s">&quot;no, correct answer is&quot;</span>; cas(i)</span><span class="ln"> <span class="k">END</span> <span class="k">IF</span></span><span class="ln"> <span class="k">NEXT</span> i</span><span class="ln"></span><span class="ln"></span><span class="ln"> <span class="k">PRINT</span> <span class="s">&quot;your correc answer is&quot;</span>; cr; <span class="s">&quot;of&quot;</span>; mh; <span class="s">&quot;problems&quot;</span></span><span class="ln"> <span class="k">PRINT</span> cr / mh * <span class="n">100</span>; <span class="s">&quot;%&quot;</span></span><span class="ln"> <span class="k">PRINT</span> <span class="s">&quot;Press Any Key...&quot;</span></span><span class="ln"> <span class="k">WHILE</span> <span class="k">INKEY$</span> = <span class="s">&quot;&quot;</span></span><span class="ln"> <span class="k">WEND</span></span><span class="ln"> <span class="k">CLEAR</span></span><span class="ln"> <span class="k">LOOP</span></span></code></pre>
+</div>
+<footer><a href="../index.html">프로그램 목록</a> · <a href="index.html">소스 목록</a></footer>
+</main>
+</body>
+</html>

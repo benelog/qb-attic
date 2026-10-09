@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>텍스트 모드로 돌아가기 소스</title>
+<meta name="description" content="그래픽 화면에서 멈춘 모니터를 SCREEN 0으로 돌려놓는 작은 유틸리티.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+<div class="src-page">
+<nav class="crumb"><a href="index.html">← 소스 목록</a></nav>
+<h1>텍스트 모드로 돌아가기</h1>
+<p class="sub"><code>text-mode-switch.bas</code></p>
+<dl class="src-meta"><dt>원래 파일</dt><dd><code>LAN/QB/TS.BAS</code></dd><dt>날짜</dt><dd>1993-02-07</dd><dt>크기</dt><dd>694바이트, 9줄</dd><dt>저장 형식</dt><dd>QB 4.5 바이너리 저장본(&quot;Fast Load and Save&quot;)을 QB에서 텍스트로 다시 저장한 뒤 UTF-8로 바꿈</dd><dt>내려받기</dt><dd><a href="text-mode-switch.bas" download>text-mode-switch.bas</a> (UTF-8)</dd></dl>
+<h2>설명</h2>
+<p><code>SCREEN 0, 0, 0</code>으로 텍스트 화면으로 돌아가 &quot;Graphic Mode ----&gt; Text Mode&quot;를 찍고 키를 기다립니다.<br>
+같은 폴더에 <code>TS.EXE</code>가 있습니다.<br>
+그래픽 프로그램이 비정상으로 끝나 화면이 그래픽 모드에 남았을 때 쓰려던 것으로 보입니다.<br>
+&quot;made by Sang-Hyuk&quot;, &quot;Pc-Serve ID: Bobble&quot;이라는 서명이 있습니다.</p>
+
+<h2>소스</h2>
+<pre class="src-code"><code><span class="ln"><span class="k">SCREEN</span> <span class="n">0</span>, <span class="n">0</span>, <span class="n">0</span></span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;Graphic Mode ----&gt; Text Mode&quot;</span></span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;                                        made by Sang-Hyuk&quot;</span></span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;                                       Pc-Serve ID: Bobble&quot;</span></span><span class="ln"><span class="k">PRINT</span> <span class="s">&quot;Press Any key...&quot;</span></span><span class="ln">pr:</span><span class="ln">a$ = <span class="k">INKEY$</span></span><span class="ln"><span class="k">IF</span> a$ = <span class="s">&quot;&quot;</span> <span class="k">THEN</span> <span class="k">GOTO</span> pr</span><span class="ln"><span class="k">END</span></span></code></pre>
+</div>
+<footer><a href="../index.html">프로그램 목록</a> · <a href="index.html">소스 목록</a></footer>
+</main>
+</body>
+</html>

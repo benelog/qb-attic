@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOS 시계 (1/100초) 소스</title>
+<meta name="description" content="DOS 인터럽트 21h 2Ch로 시각을 읽어 1/100초가 바뀔 때마다 찍습니다.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+<div class="src-page">
+<nav class="crumb"><a href="index.html">← 소스 목록</a></nav>
+<h1>DOS 시계 (1/100초)</h1>
+<p class="sub"><code>dos-time.bas</code></p>
+<dl class="src-meta"><dt>원래 파일</dt><dd><code>LAN/QB/DOSINCLO.BAS</code></dd><dt>날짜</dt><dd>1995-02-13</dd><dt>크기</dt><dd>2,739바이트, 15줄</dd><dt>저장 형식</dt><dd>QB 4.5 바이너리 저장본(&quot;Fast Load and Save&quot;)을 QB에서 텍스트로 다시 저장한 뒤 UTF-8로 바꿈</dd><dt>내려받기</dt><dd><a href="dos-time.bas" download>dos-time.bas</a> (UTF-8)</dd></dl>
+<h2>설명</h2>
+<p><code>INTERRUPTX</code>로 DOS 함수 2Ch(시각 읽기)를 불러 시, 분, 초, 1/100초를 꺼냅니다.<br>
+1/100초 값이 바뀔 때마다 한 줄씩 찍어서 <code>TIMER</code>보다 세밀한 시간을 얻을 수 있는지 본 것입니다.<br>
+<code>QB.BI</code>를 포함하므로 <code>QB.QLB</code>를 붙여 실행해야 합니다.</p>
+
+<h2>소스</h2>
+<pre class="src-code"><code><span class="ln"><span class="c">&#x27;$INCLUDE: &#x27;qb.bi&#x27;</span></span><span class="ln"><span class="k">DIM</span> <span class="k">SHARED</span> InRegs <span class="k">AS</span> RegtypeX, OutRegs <span class="k">AS</span> RegtypeX</span><span class="ln"><span class="k">CLS</span></span><span class="ln">InRegs.ax = <span class="n">&amp;H2C00</span></span><span class="ln"><span class="k">DO</span></span><span class="ln"><span class="k">WHILE</span> hsec% = before</span><span class="ln"><span class="k">CALL</span> <span class="k">interruptx</span>(<span class="n">&amp;H21</span>, InRegs, OutRegs)</span><span class="ln">hour% = OutRegs.cx / <span class="n">256</span></span><span class="ln">min% = OutRegs.cx <span class="k">AND</span> <span class="n">&amp;HFF</span></span><span class="ln">sec% = OutRegs.dx / <span class="n">256</span></span><span class="ln">hsec% = OutRegs.dx <span class="k">AND</span> <span class="n">&amp;HFF</span></span><span class="ln"><span class="k">WEND</span></span><span class="ln">before = hsec%</span><span class="ln"><span class="k">PRINT</span> hour%; <span class="s">&quot;:&quot;</span>; min%; <span class="s">&quot;:&quot;</span>; sec%; <span class="s">&quot;:&quot;</span>; hsec%</span><span class="ln"><span class="k">LOOP</span></span></code></pre>
+</div>
+<footer><a href="../index.html">프로그램 목록</a> · <a href="index.html">소스 목록</a></footer>
+</main>
+</body>
+</html>

@@ -1,7 +1,10 @@
 # 청기백기 소스 버전 비교
 
 1995년 청기백기 DOS 게임의 소스 여러 벌을 비교한 기록이다.
-대상은 `../old-com/LAN/QB/PCXLIB/`의 데모·준비 코드와 `../old-com/FLAG/`의 소스다.
+대상은 옛 PC의 `C:\LAN\QB\PCXLIB\`에 있던 데모·준비 코드와 `C:\FLAG\`의 소스다.
+2026-10-09에 직접 짠 소스를 `src/`로 옮기면서 청기백기는 최종본 `FF4.BAS`만 `src/flag-game.bas`로 남겼다.
+`FLAGV.BAS`, `FLV2.BAS`, `NEWFF4.BAS`는 옮기지 않았고 원래 폴더도 지웠으므로, 이 문서가 그 차이의 기록이다.
+`MDATA.BAS`, `MDATAUP.BAS`, `GREADS.BAS`, `PCX-SV.BAS`, `PCXREAD2.BAS`는 `src/`에 새 이름으로 있다.
 날짜는 `ls -l --time-style=long-iso`로 본 파일 수정 시각이다.
 "추정"이라고 적은 것은 코드나 날짜에서 직접 확인하지 못한 해석이다.
 

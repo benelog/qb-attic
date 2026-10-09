@@ -13,37 +13,32 @@
 
 ## 원작 소스 위치
 
-- 원작은 형제 디렉터리 `../old-com/FLAG/`에 있다.
-- 소스는 CP949 인코딩이라 `iconv -f CP949 -t UTF-8`로 읽는다.
-- 청기백기 최종본은 `FF4.BAS`다.
-  `FLAGV.BAS`와 `../old-com/LAN/QB/PCXLIB/FLV2.BAS`는 판정이 없는 이전 데모다.
-  `NEWFF4.BAS`는 이전 버전이 아니라 1996년 퍼즐 작업 때 FF4를 고치다 만 곁가지다.
+- 옛 PC의 `C:\FLAG`, `C:\LAN\QB`에 있던 직접 짠 소스 31개는 2026-10-09에 `src/`로 옮겼다.
+  이름을 바꾸고 UTF-8로 바꿨으며 원래 경로, 날짜, 크기는 `src/sources.py`에 있다.
+  설명 페이지는 `python3 src/build.py`로 다시 만든다.
+- 옮긴 뒤 형제 디렉터리 `../old-com/c-drive/FLAG/`와 `../old-com/c-drive/LAN/QB/`는 지웠다.
+  `old-com/c-drive`는 git에 없고 MYBOX `/old-com/c-drive`와 `sync-mybox.py`로 맞춘다.
+  원본(에셋, EXE, 라이브러리 포함)이 다시 필요하면 MYBOX(동기화 뒤에는 MYBOX 휴지통)에서 찾는다.
+- 원래 이름과 새 이름의 대응: `FF4`→`flag-game`, `PUZZLE`→`puzzle-game`, `BIO`→`biorhythm`, `CP`→`calc-practice`, `RANDOM`→`calc-add-sub`, `MULTI`→`calc-multiply`, `D2`→`paint`, `CALCU2`→`calculator`, `READPIC`→`pic-loader`, `BSAVE`→`hercules-bsave`, `GE`→`sprite-grid-editor`.
+  나머지는 `src/index.html`에 있다.
+- 여러 벌 중 하나만 남겼다.
+  청기백기는 `FF4.BAS`만 두고 `FLAGV`, `PCXLIB/FLV2`(판정 없는 데모), `NEWFF4`(1996년에 고치다 만 곁가지)는 뺐다.
   버전 비교는 `flag/history.md`에 있다.
-- 퍼즐은 `PUZZLE.BAS`다.
-- `MKPU.BAS`는 BOARD.SPR을 만든 도구다.
-  `VOICE.BAS`, `FLAG2.BAS`는 사운드블라스터 DMA 테스트다.
-- 같은 폴더의 `DUMP*.PCX`, `NECH2.PCX`, `DISK`, `DON.WAV`, `DON3.WAV`, `BUP/WUP.WAV`는 게임에서 쓰지 않는 파일이다.
-- 바이오리듬, 계산 연습, 그림판, 계산기의 원작은 `../old-com/LAN/QB/`에 있다.
-  `BIO.BAS`, `CP.BAS`, `RANDOM.BAS`, `MULTI.BAS`, `D2.BAS`, `CALCU2.BAS`다.
-  그림판 관련 루틴은 `READPIC.BAS`(.pic 로더), `BSAVE.BAS`, 격자 편집기 `GE.BAS`다.
-- 3D 별 여행의 원작은 통신 프로그램 폴더 `../old-com/I/3D.BAS`(1995)다.
+  PCX 뷰어는 SVGAQB판(`PCX-SV`, `PCXREAD2`)만, 텍스트 화면 저장은 `TSS`만 두었다.
+  `FLAG2`(=`VOICE`), `BE`(=`GE`)는 같은 파일이다.
+- 옮기지 않은 것: Microsoft 샘플(`CAL`=`MAL`, `WAVE`, `QCARDS`, `SORTDEMO`, `TORUS`, `REMLINE`, `DIR_SCAN`, `CALL_EX`), SVGAQB 배포본, `PCX2`, `LIB*/`, 남의 코드(`NTYPE`, `PCXVIEW`, `PCX16*`, `KINPUT`), SVGAQB 설명서 예제를 그대로 옮긴 `GREAD`.
+  `KINPUT`은 남에게 설명하는 한글 주석과 코드 모양으로 보아 남의 코드로 판단했다.
+- `BIO.BAS`는 조합형이었다.
+  `D4 C9`, `D4 CD` 같은 2바이트 문자는 뒤 바이트가 CP437 선 문자 코드(╔, ═)인 한글 카드용 박스 문자이고 두 칸을 차지한다.
+  `src/biorhythm.bas`에서는 한 칸짜리 유니코드 선 문자로 바꿨다.
+- `QU.BAS`의 암호 첫 글자는 바이트 `C8`(Alt+200)이라 `src/password-lock.bas`에서 CP437 문자 `╚`로 적었다.
+- `BIO.EXE`(1991)는 `BIO.BAS`(1993)보다 오래된 빌드다.
+- 3D 별 여행의 원작은 통신 프로그램 폴더 `../old-com/c-drive/I/3D.BAS`(1995)다.
   같은 폴더의 `VOI`, `PVO`, `SDSS.BAS`는 사운드블라스터 DMA 테스트다.
 - Code can be an art의 원작은 `old-com`에 없고 블로그 글 https://blog.benelog.net/1230429 (2007-06-01)에 소스가 있다.
   `cba/cba.js` 머리 주석과 README에 옮겨 적었다.
-- `old-com`의 나머지 .BAS는 옮길 것이 없다.
-  `CAL`(=`MAL`), `WAVE`, `NIBBLES`, `QCARDS`, `SORTDEMO`, `TORUS`, `REMLINE`, `DIR_SCAN`, `CALL_EX`는 Microsoft 샘플이다.
-  `NTYPE`, `PCXVIEW`, `PCX16*`, `ENGFC`, `LIB*/`는 남의 코드나 라이브러리 예제다.
-  `ASDF`, `S12ASC`, `TS`, `DE`, `KINPUT`은 몇 줄짜리 데모나 유틸리티다.
-  `BE`, `MAIN`, `QU`, `TS4`, `TSS*`, `MOUSETE`, `DDD`, `MAKEDATA`는 2KB 이하 바이너리 저장본이고 문자열로 보아 타이틀 화면이나 테스트다.
-  `CSS3`, `BS`, `SCROLL`, `NDV`, `CS.EXE`는 소스가 없다.
-- `LAN/QB/`는 파일마다 한글 인코딩이 다르다.
-  `BIO.BAS`는 조합형이라 `iconv -c -f JOHAB -t UTF-8`로 읽는다.
-  `BIO.BAS`의 `D4 C9`, `D4 CD` 같은 2바이트 문자는 뒤 바이트가 CP437 선 문자 코드(╔, ═)인 한글 카드용 박스 문자이고 두 칸을 차지한다.
-- `BIO.EXE`(1991)는 `BIO.BAS`(1993)보다 오래된 빌드다.
-- 첫 바이트가 `0xFC`인 .BAS는 QB 4.5 바이너리 저장본이다(`CP`, `RANDOM`, `MULTI`, `D2`, `READPIC`, `BSAVE`, `FLAG/DAT.BAS` 등).
-  아래 "바이너리 .BAS 읽기" 방법으로 텍스트로 바꿔 읽었다.
-  변환한 텍스트 소스는 저장소에 두지 않았고 세션 임시 폴더에만 있었다.
-  다시 필요하면 같은 방법으로 변환한다.
+- 첫 바이트가 `0xFC`인 .BAS는 QB 4.5 바이너리 저장본이다.
+  아래 "바이너리 .BAS 읽기" 방법으로 텍스트로 바꿨다.
 
 ## 에셋 변환 방법 (assets/ 를 다시 만들 때)
 
@@ -69,13 +64,13 @@
 
 ## 바이너리 .BAS 읽기 (DOSBox-X)
 
-- 이 머신에는 DOSBox가 설치되어 있지 않고 sudo에는 비밀번호가 필요하다.
-- root 없이 `apt-get download dosbox-x dosbox-x-data libsdl2-net-2.0-0 libopusfile0 libminizip1t64 libphysfs1` 후 `dpkg -x`로 풀었다.
-  `LD_LIBRARY_PATH=<풀린 곳>/usr/lib/x86_64-linux-gnu`로 실행한다.
+- 2026-10-09 기준 `/usr/bin/dosbox-x`(2024.03.01)가 설치되어 있다.
 - `Xvfb :97`을 띄우고 `DISPLAY=:97`로 실행하고 `import -window root`로 화면을 찍었다.
 - `[autoexec]`에서 `AUTOTYPE -w 4 -p 0.25 lalt f a c p period t x t tab tab down enter`를 먼저 걸고 `QB CP.BAS`를 실행하면 "Save As → Text" 형식으로 `CP.TXT`가 저장된다.
+  `c p`는 저장할 파일 이름이므로 파일마다 그 이름의 글자로 바꿔야 한다.
   키 이름은 `AUTOTYPE -list`로 본다(`alt`가 아니라 `lalt`).
-  QB 종료 키는 잘 먹지 않아서 파일마다 DOSBox를 띄우고 15초 뒤 끝냈다.
+  QB 종료 키는 잘 먹지 않아서 파일마다 DOSBox를 띄우고 `.TXT`가 생기면 끝냈다.
+  입력이 느려서 한 파일에 30초~1분 걸렸고, 가끔 실패해서 다시 돌렸다.
 - 원본 폴더를 건드리지 않도록 `LAN/QB`를 임시 폴더에 복사해서 마운트했다.
 - SCREEN 3(허큘리스) 프로그램은 `machine=hercules`로 띄우고 `MSHERC.COM`을 먼저 실행해야 한다.
   그렇지 않으면 "Illegal function call"이 난다.

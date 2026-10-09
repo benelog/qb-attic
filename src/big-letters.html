@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>큰 글자 타자 소스</title>
+<meta name="description" content="친 글자를 화면 위에 찍고 POINT로 읽어 상자 모양 점으로 크게 다시 그립니다.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main id="app">
+<div class="src-page">
+<nav class="crumb"><a href="index.html">← 소스 목록</a></nav>
+<h1>큰 글자 타자</h1>
+<p class="sub"><code>big-letters.bas</code></p>
+<dl class="src-meta"><dt>원래 파일</dt><dd><code>LAN/QB/S12ASC.BAS</code></dd><dt>날짜</dt><dd>1995-04-17</dd><dt>크기</dt><dd>238바이트, 16줄</dd><dt>저장 형식</dt><dd>CP949 텍스트를 UTF-8로 바꿈</dd><dt>내려받기</dt><dd><a href="big-letters.bas" download>big-letters.bas</a> (UTF-8)</dd></dl>
+<h2>설명</h2>
+<p>SCREEN 12에서 키를 칠 때마다 지금까지 친 글자를 (1, 1)에 찍습니다.<br>
+그 영역을 <code>POINT</code>로 읽어 켜진 점마다 초록 상자를 그려 8배로 키워 보여 줍니다.<br>
+<a href="title-screen.html">타이틀 화면</a>(1991)과 같은 방법이고, 2007년의 <a href="../cba/index.html">Code can be an art</a>로 이어집니다.</p>
+
+<h2>소스</h2>
+<pre class="src-code"><code><span class="ln"><span class="k">CLS</span></span><span class="ln"><span class="k">SCREEN</span> <span class="n">12</span></span><span class="ln"><span class="k">DO</span></span><span class="ln"><span class="k">WHILE</span> a$ = <span class="s">&quot;&quot;</span></span><span class="ln">a$ = <span class="k">INKEY$</span></span><span class="ln"><span class="k">WEND</span></span><span class="ln">c$ = c$ + a$</span><span class="ln"><span class="k">LOCATE</span> <span class="n">1</span>, <span class="n">1</span></span><span class="ln"><span class="k">PRINT</span> c$</span><span class="ln"><span class="k">FOR</span> i = <span class="n">0</span> <span class="k">TO</span> <span class="n">18</span></span><span class="ln"><span class="k">FOR</span> j = <span class="n">0</span> <span class="k">TO</span> <span class="n">80</span></span><span class="ln"><span class="k">IF</span> <span class="k">POINT</span>(j, i) <span class="k">THEN</span> <span class="k">LINE</span> (j * <span class="n">8</span> - <span class="n">5</span>, i * <span class="n">8</span> + <span class="n">90</span>)-(j * <span class="n">8</span>, i * <span class="n">8</span> + <span class="n">98</span>), <span class="n">2</span>, B</span><span class="ln"><span class="k">NEXT</span> j</span><span class="ln"><span class="k">NEXT</span> i</span><span class="ln">a$ = <span class="s">&quot;&quot;</span></span><span class="ln"><span class="k">LOOP</span></span></code></pre>
+</div>
+<footer><a href="../index.html">프로그램 목록</a> · <a href="index.html">소스 목록</a></footer>
+</main>
+</body>
+</html>

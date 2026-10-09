@@ -19,6 +19,7 @@
 음성 명령(`B1~B12.WAV`, `START.WAV`, `DON2.WAV`)을 그대로 변환해서 사용합니다.
 나머지는 그림 파일이 없는 프로그램이라 원작 코드의 화면 출력을 그대로 옮겼습니다.
 청기백기 소스 여러 벌(데모판 `FLV2.BAS`, `FLAGV.BAS`, `NEWFF4.BAS`와 준비 코드)의 차이는 `flag/history.md`에 정리했습니다.
+원작 QuickBasic 소스는 `src/`에 옮겨 두었고 `src/index.html`에서 파일별 설명과 함께 볼 수 있습니다.
 
 ## 실행
 
@@ -198,6 +199,18 @@ Esc 취소 처리에서 `COLOR 15, 1`로 되돌리는 것을 보고 흰 글자, 
   끝나면 원작의 `SCREEN 0`처럼 프롬프트로 돌아옵니다.
   소리는 브라우저 정책상 사용자가 누른 뒤에만 납니다.
 
+## 원작 소스 (src/)
+
+옛 PC의 `C:\FLAG`, `C:\LAN\QB` 폴더에 있던 소스 가운데 직접 짠 31개를 옮겼습니다.
+파일 이름은 내용을 알 수 있게 바꿨고(`FF4.BAS` → `flag-game.bas` 등), 설명 페이지에 원래 이름을 적었습니다.
+
+- 모두 UTF-8 텍스트입니다.
+  원본은 CP949 텍스트, 조합형 텍스트(`BIO.BAS`), QB 4.5 바이너리 저장본이 섞여 있었습니다.
+  바이너리 저장본은 DOSBox-X에서 QB로 열어 텍스트로 다시 저장했습니다.
+- 같은 프로그램이 여러 벌 남은 것은 가장 발전된 판 하나만 두고, 뺀 파일은 설명 페이지에 적었습니다.
+- Microsoft 예제, SVGAQB 같은 라이브러리 배포본, 남이 짠 코드는 옮기지 않았습니다.
+- 설명은 `src/sources.py`에 적고 `python3 src/build.py`로 `src/*.html`을 다시 만듭니다.
+
 ## 파일 구성
 
 ```
@@ -222,6 +235,9 @@ stars/index.html, stars.js  3D 별 여행
 cba/index.html, cba.js      Code can be an art (PLAY 해석기와 8×8 글꼴 포함)
 */assets/thumb.png          프로그램 목록의 카드 그림 (웹 버전 화면을 캡처)
 flag/history.md             청기백기 소스 버전 비교
+src/*.bas                   원작 소스 (UTF-8)
+src/*.html, src/index.html  원작 소스 설명 페이지와 목록 (build.py가 만듦)
+src/sources.py, build.py    설명 데이터와 페이지 생성 스크립트
 ```
 
 Local Storage 키: `flag-game.ranking`, `flag-game.options`, `puzzle-game.ranking`, `puzzle-game.options`,
